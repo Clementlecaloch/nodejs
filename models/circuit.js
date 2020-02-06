@@ -15,3 +15,19 @@ module.exports.getListeCircuit = function (callback) {
          }
       });
 };
+
+module.exports.getInfoCircuit = function (num, callback) {
+
+  db.getConnection(function(err, connexion){
+    if(!err){
+
+      let sql = "SELECT cirnom, cirlongueur, cirnbspectateurs, paynom, cirtext, ciradresseimage FROM circuit c INNER JOIN pays p ON p.paynum=c.paynum where cirnum = " + num ;
+
+      connexion.query(sql, callback);
+
+      // la connexion retourne dans le pool
+      connexion.release();
+    }
+  });
+
+}
