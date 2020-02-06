@@ -1,4 +1,5 @@
 let model = require('../models/pilote.js');
+let async = require('async');
 // ///////////////////////// R E P E R T O I R E    D E S    P I L O T E S
 
 module.exports.Repertoire = 	function(request, response){
@@ -19,17 +20,26 @@ module.exports.PiloteParLettre = function(request, response){
     response.title = 'Répertoire des pilotes';
 
     let data = request.params.lettre;
+    async.parallel ([
+      function (callback) {
+        model.getListePilote(function (err, result) {callback(null,result)});
+      },
+      function (callback) {
+        model.getPiloteByLetter(data, function (err, result) {callback(null,result)});
+      },
+    ],
 
-    model.getPiloteByLetter(data, function (err, result) {
+      function (err, result) {
         if (err) {
             // gestion de l'erreur
             console.log(err);
             return;
-        }
-        response.listePilote = result;
-        //console.log(result);
-        response.render('piloteParLettre', response);
-    });
-}
+      }
+      response.listePilote = result[0];
+      response.phoPilote = result[1];
+      response.render('piloteParLettre', response);
+      }
+    );
 
 
+};
