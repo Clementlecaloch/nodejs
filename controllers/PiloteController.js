@@ -40,6 +40,39 @@ module.exports.PiloteParLettre = function(request, response){
       response.render('piloteParLettre', response);
       }
     );
-
-
 };
+
+module.exports.InfoPilote = function(request, response){
+    let data = request.params.num;
+    response.title = 'Détail du pilote n°' + data;
+
+    async.parallel ([
+            function (callback) {
+                model.getListePilote(function (err, result) {callback(null,result)});
+            },
+            function (callback) {
+                model.getInfoPilote(data, function (err, result) {callback(null,result)});
+            },
+            function (callback) {
+                model.getSponsorByPilote(data, function (err, result) {callback(null,result)});
+            },
+            function (callback) {
+                model.getPhotoByPilote(data, function (err, result) {callback(null,result)});
+            },
+        ],
+
+        function (err, result) {
+            if (err) {
+                // gestion de l'erreur
+                console.log(err);
+                return;
+            }
+            response.listePilote = result[0];
+            response.infoPilote = result[1];
+            response.sponsorPilote = result[2];
+            response.photoPilote = result[3];
+            response.render('detailPilote', response);
+        }
+    );
+};
+

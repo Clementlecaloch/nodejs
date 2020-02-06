@@ -1,0 +1,22 @@
+{{> listeRepPiloPartial}}
+
+{{#each infoPilote}}
+    <img src="/image/pilote/{{{this.phoadresse}}}">
+    <p><b>Nom : </b>{{this.pilnom}} {{this.pilprenom}}</p>
+    <p><b>Date de naissance : </b>{{this.pildatenais}}</p>
+    <p><b>Pays : </b>{{this.paynom}}</p>
+    <p><b>Poids : </b>{{this.pilpoids}}</p>
+    <p><b>Taille : </b>{{this.piltaille}}</p>
+    <p><b>Qui suis je ? : </b>{{this.piltexte}}</p>
+{{/each}}
+
+<p><b>Principaux sponsors : </b></p>
+{{#each sponsorPilote}}
+    <p><b>{{this.sponom}}</b> ({{this.sposectactivite}})</p>
+{{/each}}
+
+{{#each photoPilote}}
+    <img src="/image/pilote/{{{this.phoadresse}}}" alt="">
+{{/each}}
+
+
