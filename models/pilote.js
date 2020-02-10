@@ -38,7 +38,7 @@ module.exports.getInfoPilote = function (num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
             let sql = "select phoadresse, pilnom, pilprenom, pildatenais, pilpoids, piltaille, ecunom, paynom, piltexte from pilote p " +
-                "join ecurie e on p.ecunum = e.ecunum join photo ph on p.pilnum = ph.pilnum join pays pa " +
+                "left join ecurie e on p.ecunum = e.ecunum join photo ph on p.pilnum = ph.pilnum join pays pa " +
                 " on pa.paynum = p.paynum where ph.phonum = 1 and p.pilnum = " + num;
             connexion.query(sql,callback);
             connexion.release();

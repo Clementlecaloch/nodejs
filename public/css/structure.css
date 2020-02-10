@@ -69,3 +69,26 @@
   width: 40px;
   height: 35px;
 }
+
+.dernierRes {
+	border: 1px solid black;
+	text-align: left;
+	border-radius: 20px;
+	padding: 20px;
+	margin: auto;
+	width: 400px;
+}
+
+.dernierRes h5 {
+	margin-top:0px ;
+	text-align: center;
+	letter-spacing: 2px;
+	text-transform: uppercase;
+	font-size:16px;
+	font-weight: lighter;
+	text-decoration: underline;
+}
+.imgPilote {
+	width: 30%;
+	height: auto;
+}

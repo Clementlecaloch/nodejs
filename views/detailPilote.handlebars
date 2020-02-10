@@ -1,22 +1,24 @@
 {{> listeRepPiloPartial}}
 
-{{#each infoPilote}}
-    <img src="/image/pilote/{{{this.phoadresse}}}">
-    <p><b>Nom : </b>{{this.pilnom}} {{this.pilprenom}}</p>
-    <p><b>Date de naissance : </b>{{this.pildatenais}}</p>
-    <p><b>Pays : </b>{{this.paynom}}</p>
-    <p><b>Poids : </b>{{this.pilpoids}}</p>
-    <p><b>Taille : </b>{{this.piltaille}}</p>
-    <p><b>Qui suis je ? : </b>{{this.piltexte}}</p>
-{{/each}}
+    <img src="/image/pilote/{{{infoPilote.phoadresse}}}">
+    <p><b>Nom : </b>{{infoPilote.pilnom}} {{infoPilote.pilprenom}}</p>
+    <p><b>Date de naissance : </b>{{formatDate infoPilote.pildatenais 'dddd D MMMM YYYY'}}</p>
+    <p><b>Pays : </b>{{infoPilote.paynom}}</p>
+    <p><b>Poids : </b>{{infoPilote.pilpoids}} Kg</p>
+    <p><b>Taille : </b>{{infoPilote.piltaille}} Cm</p>
+    {{#if infoPilote.ecunom}}
+        <p><b>Écurie : </b>{{infoPilote.ecunom}}</p>
+    {{else}}
+        <p><b>Écurie : </b> Pas d'écurie cette année</p>
+    {{/if}}
+    <p><b>Principaux sponsors : </b></p>
+    {{#each sponsorPilote}}
+        <p><b>{{this.sponom}}</b> ({{this.sposectactivite}})</p>
+    {{/each}}
+    <p class="justify"><b>Qui suis je ? : </b>{{infoPilote.piltexte}}</p>
 
-<p><b>Principaux sponsors : </b></p>
-{{#each sponsorPilote}}
-    <p><b>{{this.sponom}}</b> ({{this.sposectactivite}})</p>
-{{/each}}
-
-{{#each photoPilote}}
-    <img src="/image/pilote/{{{this.phoadresse}}}" alt="">
-{{/each}}
+    {{#each photoPilote}}
+        <img class="imgPilote" src="/image/pilote/{{{this.phoadresse}}}" alt="">
+    {{/each}}
 
 

@@ -1,1 +1,6 @@
-<h1>Ecrire ici la page d'acceuil du site</h1>
+<div class="dernierRes">
+    <h5>Dernier résultat</h5>
+    <p><b>Grand Prix de {{dernierRes.cirnom}} du {{formatDate dernierRes.gpdate 'DD/MM/YYYY'}}</b></p>
+    <p>Mise à jour le : {{formatDate dernierRes.gpdatemaj 'DD/MM/YYYY'}} </p>
+    <a href="/detailGrandPrix/{{{dernierRes.gpnum}}}">Voir les résultats</a>
+</div>
