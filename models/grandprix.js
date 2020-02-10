@@ -15,3 +15,26 @@ module.exports.getListeGrandPrix = function (callback) {
          }
       });
 };
+
+module.exports.getInfoGrandPrix = function (num, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "select gpnom, gpdate,gpcommentaire from grandprix where gpnum =" + num;
+						connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getInfoResultatPrix = function (num, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "select row_number, pilnom, pilprenom, tempscourse, ptnbpointsplace from ";
+						sql = sql + "(SELECT @row_number:=@row_number+1 AS row_number ,pilnom, pilprenom, tempscourse from course c join pilote p on c.pilnum = p.pilnum ";
+						sql = sql + "JOIN (SELECT @row_number := 0 FROM DUAL) as sub "
+						sql = sql + "where c.gpnum =" + num +" order by tempscourse asc limit 10) t join points p on p.PTPLACE=t.row_number ";
+						connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};

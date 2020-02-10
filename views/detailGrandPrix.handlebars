@@ -1,0 +1,22 @@
+{{> listeResultatPartial}}
+
+<h1> {{infoGP.gpnom}} {{formatDate infoGP.gpdate 'DD/MM/YYYY' }}</h1>
+
+<table class="">
+	 <tr>
+     <td>Place</td>
+     <td>Pilote</td>
+     <td>Temps</td>
+     <td>NbPoints</td>
+   </tr>
+  {{#each score}}
+  <tr>
+    <td>{{this.row_number}}</td>
+    <td>{{this.pilnom}} {{this.pilprenom}}</td>
+    <td>{{this.tempscourse}}</td>
+    <td>{{this.ptnbpointsplace}}</td>
+  </tr>
+ {{/each}}
+</table>
+
+<p>{{infoGP.gpcommentaire}}</p>
