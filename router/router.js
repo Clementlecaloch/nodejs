@@ -26,6 +26,7 @@ module.exports = function(app){
 
  //Résultats
    app.get('/resultats', ResultatController.ListerResultat);
+   app.get('/detailGrandPrix/:num', ResultatController.ResumerGP);
 
 
 // tout le reste
