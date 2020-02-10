@@ -28,3 +28,37 @@ module.exports.getListeEcurie = function (callback) {
          }
       });
 };
+
+module.exports.getEcurieByNumber = function (num, callback) {
+
+    db.getConnection(function(err, connexion){
+        if(!err){
+            let sql = "SELECT ecuadresseimage, ecunom, ecunomdir, ecuadrsiege, paynom FROM ecurie e join pays p on p.paynum = e.paynum where e.ecunum = " + num;
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getPiloteByEcu = function (num, callback) {
+
+    db.getConnection(function(err, connexion){
+        if(!err){
+            let sql = "SELECT pi.pilnum, pilnom, pilprenom, phoadresse from pilote pi join photo ph on pi.pilnum = ph.pilnum join ecurie e on pi.ecunum = e.ecunum where phonum = 1 and e.ecunum = " + num;
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getPhotoEcu = function (num, callback) {
+
+    db.getConnection(function(err, connexion){
+        if(!err){
+            let sql = "SELECT voiadresseimage, voinom, typelibelle from voiture v join ecurie e on v.ecunum = e.ecunum join type_voiture t on t.typnum = v.typnum where e.ecunum = " + num;
+            connexion.query(sql, callback);
+            connexion.release();
+        }
+    });
+};
+

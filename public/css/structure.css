@@ -92,3 +92,28 @@
 	width: 30%;
 	height: auto;
 }
+.touteVoitures {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: nowrap;
+}
+
+.infoVoiture {
+	display: flex;
+	flex-direction: column;
+	padding: 10px 20px;
+}
+.infoVoiture > img{
+	height:200px;
+	width: auto;
+}
+
+.rowEcurie {
+	display: flex;
+	flex-direction: row;
+}
+.rowEcurie img {
+	max-width: 300px;
+	height: auto;
+	padding-right: 40px;
+}
