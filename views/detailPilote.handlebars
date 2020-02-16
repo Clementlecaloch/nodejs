@@ -18,7 +18,7 @@
     <p class="justify"><b>Qui suis je ? : </b>{{infoPilote.piltexte}}</p>
 
     {{#each photoPilote}}
+      <a class="example-image-link" href="/image/pilote/{{{this.phoadresse}}}" data-lightbox="imagePilote">
         <img class="imgPilote" src="/image/pilote/{{{this.phoadresse}}}" alt="">
+      </a>
     {{/each}}
-
-
