@@ -16,7 +16,14 @@
 {{#if pilotes}}
     <p><b>Pilotes : </b></p>
     {{#each pilotes}}
+    <div class="infobulle">
         <p>{{this.pilprenom}} {{this.pilnom}} </p>
+        <span>
+          <img  src="/image/pilote/{{{this.phoadresse}}}" alt="">
+          <p>{{this.pilprenom}} {{this.pilnom}} </p>
+          <p>{{this.piltexte}} </p>
+        </span>
+    </div>
     {{/each}}
     <div class="touteVoitures">
         {{#each photo}}
@@ -30,9 +37,3 @@
     {{else}}
     <p>Cette écurie ne participe pas au championnat cette année</p>
 {{/if}}
-
-
-
-
-
-
