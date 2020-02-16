@@ -59,13 +59,9 @@ module.exports.getSponsorByPilote = function (num, callback) {
 module.exports.getPhotoByPilote = function (num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-            let sql = "select phoadresse from photo p join pilote pi on p.pilnum = pi.pilnum where phonum != 1 and p.pilnum = " + num;
+            let sql = "select phoadresse, phocommentaire from photo p join pilote pi on p.pilnum = pi.pilnum where phonum != 1 and p.pilnum = " + num;
             connexion.query(sql,callback);
             connexion.release();
         }
     });
 };
-
-
-
-
