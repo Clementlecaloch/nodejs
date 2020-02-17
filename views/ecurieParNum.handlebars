@@ -1,39 +1,45 @@
-{{> listerMenuEcurie}}
+<div class="row">
+    {{> listerMenuEcurie}}
 
-<div class="rowEcurie">
-    <img src="/image/ecurie/{{{infoEcu.ecuadresseimage}}}">
     <div>
-        <p><b>Nom : </b>{{infoEcu.ecunom}}</p>
-        <p><b>Directeur : </b>{{infoEcu.ecunomdir}}</p>
-        <p><b>Adresse : </b>{{infoEcu.ecuadrsiege}}</p>
-        <p><b>Pays : </b>{{infoEcu.paynom}}</p>
+        <div class="rowEcurie">
+            <img src="/image/ecurie/{{{infoEcu.ecuadresseimage}}}">
+            <div>
+                <p><b>Nom : </b>{{infoEcu.ecunom}}</p>
+                <p><b>Directeur : </b>{{infoEcu.ecunomdir}}</p>
+                <p><b>Adresse : </b>{{infoEcu.ecuadrsiege}}</p>
+                <p><b>Pays : </b>{{infoEcu.paynom}}</p>
+            </div>
+        </div>
+
+
+        {{#if pilotes}}
+            <p><b>Pilotes : </b></p>
+            {{#each pilotes}}
+                <div class="infobulle">
+                    <a href="/detailPilote/{{{this.pilnum}}}">{{this.pilprenom}} {{this.pilnom}} </a>
+                    <span>
+                        <img  src="/image/pilote/{{{this.phoadresse}}}" alt="">
+                        <div>
+                            <p><b>{{this.pilprenom}} {{this.pilnom}} </b></p>
+                            <p>{{this.piltexte}}... </p>
+                        </div>
+                    </span>
+                </div>
+            {{/each}}
+            <div class="touteVoitures">
+                {{#each photo}}
+                    <div class="infoVoiture">
+                        <img src="/image/ecurie/voiture/{{this.voiadresseimage}}">
+                        <p>{{this.voinom}}</p>
+                        <p>{{this.typelibelle}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        {{else}}
+            <p>Cette écurie ne participe pas au championnat cette année</p>
+        {{/if}}
     </div>
 </div>
 
 
-
-
-{{#if pilotes}}
-    <p><b>Pilotes : </b></p>
-    {{#each pilotes}}
-    <div class="infobulle">
-        <p>{{this.pilprenom}} {{this.pilnom}} </p>
-        <span>
-          <img  src="/image/pilote/{{{this.phoadresse}}}" alt="">
-          <p>{{this.pilprenom}} {{this.pilnom}} </p>
-          <p>{{this.piltexte}} </p>
-        </span>
-    </div>
-    {{/each}}
-    <div class="touteVoitures">
-        {{#each photo}}
-            <div class="infoVoiture">
-                <img src="/image/ecurie/voiture/{{this.voiadresseimage}}">
-                <p>{{this.voinom}}</p>
-                <p>{{this.typelibelle}}</p>
-            </div>
-        {{/each}}
-    </div>
-    {{else}}
-    <p>Cette écurie ne participe pas au championnat cette année</p>
-{{/if}}

@@ -44,7 +44,7 @@ module.exports.getPiloteByEcu = function (num, callback) {
 
     db.getConnection(function(err, connexion){
         if(!err){
-            let sql = "SELECT pi.pilnum, pilnom, pilprenom, phoadresse, piltexte from pilote pi join photo ph on pi.pilnum = ph.pilnum join ecurie e on pi.ecunum = e.ecunum where phonum = 1 and e.ecunum = " + num;
+            let sql = "SELECT pi.pilnum, pilnom, pilprenom, phoadresse, substring(piltexte, 1, 200) as piltexte from pilote pi join photo ph on pi.pilnum = ph.pilnum join ecurie e on pi.ecunum = e.ecunum where phonum = 1 and e.ecunum = " + num;
             connexion.query(sql, callback);
             connexion.release();
         }

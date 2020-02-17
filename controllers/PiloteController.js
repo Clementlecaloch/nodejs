@@ -67,8 +67,6 @@ module.exports.InfoPilote = function(request, response){
                 console.log(err);
                 return;
             }
-
-            console.log(result[1][0]);
             response.listePilote = result[0];
             response.infoPilote = result[1][0];
             response.sponsorPilote = result[2];

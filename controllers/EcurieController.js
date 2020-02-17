@@ -42,7 +42,7 @@ module.exports.InfoEcurie = function(request, response){
                 console.log(err);
                 return;
             }
-            console.log(result[1]);
+
             response.listeEcurie = result[0];
             response.infoEcu = result[1][0];
             response.pilotes = result[2];

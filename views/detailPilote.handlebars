@@ -11,10 +11,13 @@
     {{else}}
         <p><b>Écurie : </b> Pas d'écurie cette année</p>
     {{/if}}
-    <p><b>Principaux sponsors : </b></p>
-    {{#each sponsorPilote}}
-        <p><b>{{this.sponom}}</b> ({{this.sposectactivite}})</p>
-    {{/each}}
+
+    {{#if sponsorPilote}}
+        <p><b>Principaux sponsors : </b></p>
+        {{#each sponsorPilote}}
+            <p><b>{{this.sponom}}</b> ({{this.sposectactivite}})</p>
+        {{/each}}
+    {{/if}}
     <p class="justify"><b>Qui suis je ? : </b>{{infoPilote.piltexte}}</p>
 
     {{#each photoPilote}}

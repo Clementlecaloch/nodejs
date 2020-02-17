@@ -1,13 +1,19 @@
-{{> listeCircuitPartial}}
 
-<img src="/image/circuit/{{{detailCircuit.ciradresseimage}}}">
+<div class="row">
+    {{> listeCircuitPartial}}
 
-<p><b>Nom : </b>{{detailCircuit.cirnom}}</p>
+    <div>
+        <img class="imgcircuit" src="/image/circuit/{{{detailCircuit.ciradresseimage}}}">
 
-<p><b>Longueur : </b>{{detailCircuit.cirlongueur}} m</p>
+        <p><b>Nom : </b>{{detailCircuit.cirnom}}</p>
 
-<p><b>Nombre de spectateurs : </b>{{detailCircuit.cirnbspectateurs}}</p>
+        <p><b>Longueur : </b>{{detailCircuit.cirlongueur}} m</p>
 
-<p><b>Pays : </b>{{detailCircuit.paynom}}</p>
+        <p><b>Nombre de spectateurs : </b>{{detailCircuit.cirnbspectateurs}}</p>
 
-<p>{{detailCircuit.cirtext}}</p>
+        <p><b>Pays : </b>{{detailCircuit.paynom}}</p>
+    </div>
+</div>
+<p class="justify">{{detailCircuit.cirtext}}</p>
+
+

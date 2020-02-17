@@ -1,7 +1,7 @@
     body {
     	font-family: "Segoe UI", "DejaVu Sans",Verdana, sans-serif;
-    	background: url('/image/fond.jpg') repeat;
-		  font-size:0.8em;
+		background: url('/image/fond.jpg') fixed;
+		font-size:0.8em;
     	margin: 0;
     	padding: 0;
     	text-align: center;
@@ -23,7 +23,7 @@
 		background:#000000;
     }
   .monBody #contenu {
-		 padding:20px;
+		 padding:40px;
     }
     .monBody #footer {
     padding: 0 10px;
@@ -32,6 +32,10 @@
 		height:150px;
 		background:url(/image/footer.jpg) no-repeat;
     }
+	.monBody #footer img {
+		margin-top: 20px;
+	}
+
 	#menu a	{
 		color:#ffffff;
 		text-decoration:none;
@@ -44,10 +48,10 @@
       max-width: 20%;
   }
   .tabpayscir  {
- 	  float:right;
+	  float: right;
  	  padding:10px;
  	  border:1px solid black;
- 	  margin:10px
+ 	  margin:10px;
  	  -moz-border-radius:15px;
  	  border-radius:15px;
  }
@@ -59,7 +63,11 @@
  	text-decoration:none;
  	color:#0072ff;
  }
- .lienNotFound {align:center; style="background-color: #1d81b1;color: #FFFFFF;text-transform: uppercase;"}
+ .lienNotFound {align:center;
+	 background-color: #1d81b1;
+	 color: #FFFFFF;
+	 text-transform: uppercase;
+ }
  .photoNotFound {
    max-height: 40%;
    max-width: 40%;
@@ -77,16 +85,19 @@
 	padding: 20px;
 	margin: auto;
 	width: 400px;
+	text-align: center;
 }
 
 .dernierRes h5 {
 	margin-top:0px ;
-	text-align: center;
 	letter-spacing: 2px;
 	text-transform: uppercase;
 	font-size:16px;
 	font-weight: lighter;
 	text-decoration: underline;
+}
+.dernierRes a {
+	text-align: center;
 }
 .imgPilote {
 	width: 30%;
@@ -104,7 +115,7 @@
 	padding: 10px 20px;
 }
 .infoVoiture > img{
-	height:200px;
+	height: 100px;
 	width: auto;
 }
 
@@ -114,23 +125,67 @@
 }
 .rowEcurie img {
 	max-width: 300px;
+	max-height: 100px;
 	height: auto;
 	padding-right: 40px;
 }
 
-
 .infobulle span{
+	display: flex;
+	flex-direction: row;
+	max-width: 40%;
   position: absolute;
-  margin-top:23px;
-  margin-left:-35px;
-  background:rgba(255,255,255);
+	margin-top: 10px;
+  background:white;
   padding:15px;
   border-radius:3px;
   border: 2px solid black;
-  transform:scale(0) rotate(-12deg);
-  transition:all .25s;
+  transform:scale(0);
+  transition:all 0.4s ease-in-out;
 }
 
+.infobulle span img {
+	max-height: 100px;
+	max-width: 100px;
+}
+
+	.infobulle span div {
+		padding: 10px;
+	}
+
+	.infobulle span::after {
+		content: "";
+		position: absolute;
+		top:-20px;
+		left: 40px;
+		transform: rotate(180deg);
+		border-width: 10px;
+		border-style: solid;
+		border-color: black transparent transparent transparent;
+	}
+
+
 .infobulle:hover span, .piloteEcurie:focus span{
-     transform:scale(1) rotate(0);
+     transform:scale(1);
+}
+
+.grandPrixRes td, th {
+	border: 1px solid black;
+	padding: 5px;
+}
+
+.row {
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: space-between;
+}
+
+.justify {
+	text-align: justify;
+}
+
+.imgcircuit {
+	max-height: 400px;
+	max-width: 400px;
+
 }

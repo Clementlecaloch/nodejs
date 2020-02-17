@@ -9,7 +9,6 @@ module.exports.Index = 	function(request, response){
             return;
         }
         response.dernierRes = result[0];
-        console.log(result);
         response.render('home', response);
     });
 
