@@ -6,6 +6,11 @@ let Cryptr = require('cryptr')
 
 module.exports.Index = function (request, response) {
     response.title = "Bienvenue du côté administrateur sur le site de SIXVOIX (IUT du Limousin).";
+    if (request.session.admin) {
+      request.session.admin = true;
+    } else {
+      request.session.admin = false;
+    }
     response.render('home', response);
 };
 
@@ -22,8 +27,6 @@ module.exports.Connexion = function (request, response) {
       } else {
         request.session.admin = false;
       }
-      console.log(decryptedString);
-      console.log(result);
       response.title = "Bienvenue du côté administrateur sur le site de SIXVOIX (IUT du Limousin).";
       response.render('home', response);
   });
