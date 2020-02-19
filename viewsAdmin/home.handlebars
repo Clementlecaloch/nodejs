@@ -1,10 +1,14 @@
 {{#if session.admin}}
+
+
+
 {{else}}
-<div>
-  <h2>Administation</h2>
-  <form class="" action="#" method="post">
-    <label id=login>Login : <input name=login type="text">
-    <label id=mpd>Mot de Passe : <input name=mpd type="password">
-    <input type=submit value='Connexion'>
-  </form>
+    <h2>Administation</h2>
+    <form class="" action="#" method="post">
+        <label id=login>Login : </label>
+        <input name=login type="text">
+        <label id=mpd>Mot de Passe :</label>
+        <input name=mpd type="password">
+        <input type=submit value='Connexion'>
+    </form>
 {{/if}}
