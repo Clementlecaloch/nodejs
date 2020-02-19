@@ -1,0 +1,33 @@
+<h1>Ajouter un pilote</h1>
+<form action="">
+    <label>Prénom</label>
+    <input name="prenom" type="text">
+    <label>Nom</label>
+    <input name="nom" type="text">
+    <label>Date de naissance</label>
+    <input name="date" type="date">
+    <label>Nationalité</label>
+    <select name="nationalite">
+        {{#each nationalite}}
+            <option value="{{{this.paynum}}}">{{this.paynat}}</option>
+        {{/each}}
+    </select>
+    <label>Ecurie</label>
+    <select name="ecurie">
+        {{#each ecurie}}
+            <option value="{{{this.ecunum}}}">{{this.ecunom}}</option>
+        {{/each}}
+    </select>
+
+    <label>Points</label>
+    <input name="points" type="number">
+    <label>Poids</label>
+    <input name="poids" type="number">
+    <label>Taille</label>
+    <input name="taille" type="number">
+    <label >Image officielle</label>
+    <input type="file" name="photo">
+    <label>Description</label>
+    <textarea name="description" id="" cols="30" rows="10"></textarea>
+    <input class="valider" type="submit" value="Ajouter">
+</form>

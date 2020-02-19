@@ -7,6 +7,9 @@
     	text-align: center;
     	color: #000000;
     }
+	h1 {
+		text-align: center;
+	}
     .monBody #container {
     	width: 900px;
     	margin: 0 auto;
@@ -168,8 +171,7 @@
 .infobulle:hover span, .piloteEcurie:focus span{
      transform:scale(1);
 }
-
-.grandPrixRes td, th {
+	td, th {
 	border: 1px solid black;
 	padding: 5px;
 }
@@ -187,5 +189,37 @@
 .imgcircuit {
 	max-height: 400px;
 	max-width: 400px;
+}
+.center {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
 
+form {
+	display: grid;
+	grid-template-columns: 20% 50%;
+	grid-column-gap: 40px;
+	grid-row-gap: 30px;
+}
+
+.valider {
+	padding: 10px;
+	position: inherit;
+	text-transform: uppercase;
+	background: linear-gradient(brown,red);
+	color:white;
+	border: 1px solid black;
+}
+
+input[type="text"], input[type="number"], input[type="date"], input[type="submit"], textarea {
+	border-radius: 20px;
+	border: 1px solid black;
+	font-size: 20px;
+	text-indent: 5px;
+}
+
+label {
+	font-size: 20px;
+	font-weight: bold;
 }
