@@ -17,7 +17,7 @@ module.exports.Index = function (request, response) {
 };
 
 module.exports.Ajouter = function (request, response) {
-    response.title = "Ajouter un pilote"
+    response.title = "Ajouter un pilote";
     async.parallel ([
             function (callback) {
                 model.getNationalitePilote(function (err, result) {callback(null,result)});
@@ -38,6 +38,23 @@ module.exports.Ajouter = function (request, response) {
             response.render('ajouterPilote', response);
         }
     );
+};
+
+module.exports.ajouterPilote = function (request, response) {
+    response.title = "Ajouter un pilote";
+    data = request.body;
+    photo = data["PHOADRESSE"];
+    delete data["PHOADRESSE"];
+
+
+    model.ajouterPilote(data, function (err, result) {
+      if (err) {
+          // gestion de l'erreur
+          console.log(err);
+          return;
+      }
+      response.render('ajouterPilote', response);
+    });
 };
 
 module.exports.Modifier = function (request, response) {

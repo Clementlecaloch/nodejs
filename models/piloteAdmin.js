@@ -60,3 +60,12 @@ module.exports.getInfoPilote = function (num, callback) {
     });
 };
 
+module.exports.ajouterPilote = function (data, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          console.log(data);
+          connexion.query('insert into pilote SET ?',data,callback);
+          connexion.release();
+        }
+    });
+};
