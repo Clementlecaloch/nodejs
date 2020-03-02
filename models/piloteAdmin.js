@@ -69,3 +69,13 @@ module.exports.ajouterPilote = function (data, callback) {
         }
     });
 };
+
+module.exports.ajouterPhoto = function (photo, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "insert into photo (PHONUM,PILNUM,PHOADRESSE) SELECT 1,MAX(PILNUM),'"+photo+"' from pilote";
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};

@@ -1,11 +1,11 @@
 <h1>Ajouter un pilote</h1>
 <form action="#" method="post">
     <label>Prénom</label>
-    <input name="PILPRENOM" type="text">
+    <input name="PILPRENOM" type="text" required>
     <label>Nom</label>
-    <input name="PILNOM" type="text">
+    <input name="PILNOM" type="text" required>
     <label>Date de naissance</label>
-    <input name="PILDATENAIS" type="date">
+    <input name="PILDATENAIS" type="date" required>
     <label>Nationalité</label>
     <select name="PAYNUM">
         {{#each nationalite}}
@@ -14,20 +14,20 @@
     </select>
     <label>Ecurie</label>
     <select name="ECUNUM">
-      <option>Pas d'écurie</option>
+      <option value="NULL">Pas d'écurie</option>
         {{#each ecurie}}
             <option value="{{{this.ecunum}}}">{{this.ecunom}}</option>
         {{/each}}
     </select>
     <label>Points</label>
-    <input name="PILPOINTS" type="number">
+    <input name="PILPOINTS" type="number" required>
     <label>Poids</label>
-    <input name="PILPOIDS" type="number">
+    <input name="PILPOIDS" type="number" required>
     <label>Taille</label>
-    <input name="PILTAILLE" type="number">
+    <input name="PILTAILLE" type="number" required>
     <label >Image officielle</label>
     <input type="file" name="PHOADRESSE">
     <label>Description</label>
     <textarea name="PILTEXTE" id="" cols="30" rows="10"></textarea>
-    <input class="valider" type="submit" value="Ajouter">
+    <input class="valider" type="submit">
 </form>
