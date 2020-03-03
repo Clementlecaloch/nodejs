@@ -3,6 +3,8 @@ let model = require('../models/piloteAdmin.js');
 let async = require('async');
 
 
+
+
 module.exports.Index = function (request, response) {
     response.title = "Gestion des pilotes";
     model.getListePilote( function (err, result) {
@@ -40,38 +42,47 @@ module.exports.Ajouter = function (request, response) {
     );
 };
 
-module.exports.ajouterPilote = function (request, response) {
+module.exports.ajouterPilote = function (req, response) {
     response.title = "Ajouter un pilote";
-    data = request.body;
+    data = req.body;
+
     if (data["ECUNUM"] == 'NULL') {
         delete data["ECUNUM"];
     }
-    photo = data["PHOADRESSE"];
-    delete data["PHOADRESSE"];
+    let file = req.files.foo;
+
     async.parallel ([
             function (callback) {
-                model.getNationalitePilote(function (err, result) {callback(null,result)});
+                model.getNationalitePilote(function (err, res) {callback(null,res)});
             },
             function (callback) {
-                model.getNomEcurie(function (err, result) {callback(null,result)});
+                model.getNomEcurie(function (err, res) {callback(null,res)});
             },
             function (callback) {
-                model.ajouterPilote(data, function (err, result) {callback(null,result)});
+                model.ajouterPilote(data, function (err, res) {callback(null,res)});
             },
             function (callback) {
-                model.ajouterPhoto(photo,function (err, result) {callback(null,result)});
+                setTimeout(model.ajouterPhoto(file.name,function (err, res) {callback(null,res)});,10);
             },
         ],
 
-        function (err, result) {
+        function (err, res) {
             if (err) {
                 // gestion de l'erreur
                 console.log(err);
                 return;
             }
 
-            response.nationalite = result[0];
-            response.ecurie = result[1];
+            file.mv("./public/image/pilote/"+file.name, function (err,res){
+              if (err) {
+                console.log(err);
+              } else {
+                console.log('Upload');
+              }
+            });
+
+            response.nationalite = res[0];
+            response.ecurie = res[1];
             response.render('ajouterPilote', response);
         }
     );

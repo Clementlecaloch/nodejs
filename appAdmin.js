@@ -3,9 +3,15 @@ let express         = require('express'),
     cookieParser    = require('cookie-parser'),
     bodyParser      = require('body-parser'), //pour récupérer les résultats des post
     http = require('http'),
-    path = require('path');
+    path = require('path'),
+    fileUpload = require('express-fileupload');
+
 
 let app = express();
+
+
+app.use(fileUpload());
+
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.set('port', 6900);
@@ -22,6 +28,7 @@ app.use(session({
     resave: true,
     saveUninitialized: true
 }));
+
 
 /* ces lignes permettent d'utiliser directement les variables de session dans handlebars
  UTILISATION : {{session.MaVariable}}  */

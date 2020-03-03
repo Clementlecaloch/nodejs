@@ -2,8 +2,10 @@ let HomeAdminController = require('./../controllers/HomeAdminController');
 let AuthentificationController = require('./../controllers/AuthentificationController');
 let PiloteAdminController = require('./../controllers/PiloteAdminController');
 
+
 // Routes
 module.exports = function(app){
+
 
   // Main Routes
   app.get('/', HomeAdminController.Index);
