@@ -62,7 +62,7 @@ module.exports.ajouterPilote = function (req, response) {
                 model.ajouterPilote(data, function (err, res) {callback(null,res)});
             },
             function (callback) {
-                setTimeout(model.ajouterPhoto(file.name,function (err, res) {callback(null,res)});,10);
+                model.ajouterPhoto(file.name,function (err, res) {callback(null,res)});
             },
         ],
 

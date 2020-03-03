@@ -152,24 +152,24 @@
 	max-width: 100px;
 }
 
-	.infobulle span div {
-		padding: 10px;
-	}
+.infobulle span div {
+	padding: 10px;
+}
 
-	.infobulle span::after {
-		content: "";
-		position: absolute;
-		top:-20px;
-		left: 40px;
-		transform: rotate(180deg);
-		border-width: 10px;
-		border-style: solid;
-		border-color: black transparent transparent transparent;
-	}
+.infobulle span::after {
+	content: "";
+	position: absolute;
+	top:-20px;
+	left: 40px;
+	transform: rotate(180deg);
+	border-width: 10px;
+	border-style: solid;
+	border-color: black transparent transparent transparent;
+}
 
 
 .infobulle:hover span, .piloteEcurie:focus span{
-     transform:scale(1);
+    transform:scale(1);
 }
 	td, th {
 	border: 1px solid black;
