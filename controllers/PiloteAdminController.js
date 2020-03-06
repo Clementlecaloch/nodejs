@@ -51,6 +51,10 @@ module.exports.ajouterPilote = function (req, response) {
     }
     let file = req.files.foo;
 
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
     async.parallel ([
             function (callback) {
                 model.getNationalitePilote(function (err, res) {callback(null,res)});
@@ -62,7 +66,9 @@ module.exports.ajouterPilote = function (req, response) {
                 model.ajouterPilote(data, function (err, res) {callback(null,res)});
             },
             function (callback) {
-                model.ajouterPhoto(file.name,function (err, res) {callback(null,res)});
+                sleep(100).then(() => {
+                    model.ajouterPhoto(file.name,function (err, res) {callback(null,res)});
+                });
             },
         ],
 

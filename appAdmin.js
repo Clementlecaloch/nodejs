@@ -43,7 +43,7 @@ app.use(function(request, response, next){
 */
 var exphbs = require('express-handlebars');
 app.set('view engine', 'handlebars'); //nom de l'extension des fichiers
-var handlebars  = require('./helpers/handlebars.js')(exphbs); //emplacement des helpers
+var handlebars  = require('./helpers/handlebarsAdmin.js')(exphbs); //emplacement des helpers
 // helpers : ajouts de fonctionnalités pour handlebars
 
 app.engine('handlebars', handlebars.engine);

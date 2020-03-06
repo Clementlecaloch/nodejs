@@ -1,11 +1,11 @@
 <h1>Modifier un pilote</h1>
-<form action="">
+<form action="#" method="post" enctype="multipart/form-data">
     <label>Prénom</label>
-    <input name="prenom" type="text" value="{{{pilote.pilnom}}}">
+    <input name="prenom" type="text" value="{{{pilote.pilprenom}}}">
     <label>Nom</label>
-    <input name="nom" type="text">
+    <input name="nom" type="text" value="{{{pilote.pilnom}}}">
     <label>Date de naissance</label>
-    <input name="date" type="date">
+    <input name="date" type="date" value={{formatDate pilote.pildatenais 'YYYY-MM-DD'}}>
     <label>Nationalité</label>
     <select name="nationalite">
         {{#each nationalite}}
@@ -18,16 +18,15 @@
             <option value="{{{this.ecunum}}}">{{this.ecunom}}</option>
         {{/each}}
     </select>
-
     <label>Points</label>
-    <input name="points" type="number">
+    <input name="points" type="number" value="{{{pilote.pilpoints}}}">
     <label>Poids</label>
-    <input name="poids" type="number">
+    <input name="poids" type="number" value="{{{pilote.pilpoids}}}">
     <label>Taille</label>
-    <input name="taille" type="number">
+    <input name="taille" type="number" value="{{{pilote.piltaille}}}">
     <label >Image officielle</label>
     <input type="file" name="photo">
     <label>Description</label>
-    <textarea name="description" id="" cols="30" rows="10"></textarea>
-    <input class="valider" type="submit" value="Ajouter">
+    <textarea name="description" id="" cols="30" rows="10">{{{pilote.piltexte}}}</textarea>
+    <input class="valider" type="submit" value="Modifier">
 </form>
