@@ -1,32 +1,35 @@
 <h1>Modifier un pilote</h1>
 <form action="#" method="post" enctype="multipart/form-data">
     <label>Prénom</label>
-    <input name="prenom" type="text" value="{{{pilote.pilprenom}}}">
+    <input name="PILPRENOM" type="text" value="{{{pilote.pilprenom}}}">
     <label>Nom</label>
-    <input name="nom" type="text" value="{{{pilote.pilnom}}}">
+    <input name="PILNOM" type="text" value="{{{pilote.pilnom}}}">
     <label>Date de naissance</label>
-    <input name="date" type="date" value={{formatDate pilote.pildatenais 'YYYY-MM-DD'}}>
+    <input name="PILDATENAIS" type="date" value={{formatDate pilote.pildatenais 'YYYY-MM-DD'}}>
     <label>Nationalité</label>
-    <select name="nationalite">
+    <select name="PAYNUM">
         {{#each nationalite}}
-            <option value="{{{this.paynum}}}">{{this.paynat}}</option>
+            <option value="{{{this.paynum}}}" >{{this.paynat}}</option>
         {{/each}}
     </select>
     <label>Ecurie</label>
-    <select name="ecurie">
+    <select name="ECUNUM">
+        <option value="NULL">Pas d'écurie</option>
         {{#each ecurie}}
             <option value="{{{this.ecunum}}}">{{this.ecunom}}</option>
         {{/each}}
     </select>
     <label>Points</label>
-    <input name="points" type="number" value="{{{pilote.pilpoints}}}">
+    <input name="PILPOINTS" type="number" value="{{{pilote.pilpoints}}}">
     <label>Poids</label>
-    <input name="poids" type="number" value="{{{pilote.pilpoids}}}">
+    <input name="PILPOIDS" type="number" value="{{{pilote.pilpoids}}}">
     <label>Taille</label>
-    <input name="taille" type="number" value="{{{pilote.piltaille}}}">
+    <input name="PILTAILLE" type="number" value="{{{pilote.piltaille}}}">
     <label >Image officielle</label>
-    <input type="file" name="photo">
+    <input type="file" name="foo">
     <label>Description</label>
-    <textarea name="description" id="" cols="30" rows="10">{{{pilote.piltexte}}}</textarea>
+    <textarea name="PILTEXTE" id="PILTEXTE" cols="30" rows="10">{{{pilote.piltexte}}}</textarea>
+    <label class="display-none">ID</label>
+    <input name="id" class="display-none" type="text" value="{{{pilote.pilnum}}}">
     <input class="valider" type="submit" value="Modifier">
 </form>

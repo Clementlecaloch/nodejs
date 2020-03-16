@@ -49,7 +49,18 @@ module.exports.ajouterPilote = function (req, response) {
     if (data["ECUNUM"] == 'NULL') {
         delete data["ECUNUM"];
     }
-    let file = req.files.foo;
+    if (!req.files || Object.keys(req.files).length === 0) {
+      let file = null;
+    }else {
+      let file = req.files.foo.name;
+      file.mv("./public/image/pilote/"+file, function (err,res){
+        if (err) {
+          console.log(err);
+        } else {
+          console.log('Upload');
+        }
+      });
+    }
 
     function sleep (time) {
         return new Promise((resolve) => setTimeout(resolve, time));
@@ -67,7 +78,7 @@ module.exports.ajouterPilote = function (req, response) {
             },
             function (callback) {
                 sleep(100).then(() => {
-                    model.ajouterPhoto(file.name,function (err, res) {callback(null,res)});
+                    model.ajouterPhoto(file,function (err, res) {callback(null,res)});
                 });
             },
         ],
@@ -79,13 +90,7 @@ module.exports.ajouterPilote = function (req, response) {
                 return;
             }
 
-            file.mv("./public/image/pilote/"+file.name, function (err,res){
-              if (err) {
-                console.log(err);
-              } else {
-                console.log('Upload');
-              }
-            });
+
 
             response.nationalite = res[0];
             response.ecurie = res[1];
@@ -98,6 +103,7 @@ module.exports.Modifier = function (request, response) {
     response.title = "Ajouter un pilote";
 
     let data = request.params.num;
+
 
     async.parallel ([
             function (callback) {
@@ -121,6 +127,63 @@ module.exports.Modifier = function (request, response) {
             response.ecurie = result[1];
             response.pilote = result[2][0];
             response.render('modifierPilote', response);
+        }
+    );
+};
+
+
+module.exports.modifierPilote = function (req, response) {
+    response.title = "Modifier un pilote";
+    data = req.body;
+
+    console.log(data);
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+
+    async.parallel ([
+            function (callback) {
+                model.modifierPilote(data, function (err, res) {callback(null,res)});
+            },
+            function (callback) {
+              if (!req.files || Object.keys(req.files).length === 0) {
+                callback(null,null);
+              }else {
+                let file = req.files.foo;
+                model.modifierPhoto(file.name,data["id"],function (err, res) {callback(null,res)});
+              }
+            },
+
+            function (callback) {
+              sleep(100).then(() => {
+                  model.getListePilote( function (err, res) {callback(null,res)});
+              });
+            },
+        ],
+
+        function (err, res) {
+            if (err) {
+                // gestion de l'erreur
+                console.log(err);
+                return;
+            }
+
+            if (!req.files || Object.keys(req.files).length === 0) {
+
+            }else {
+              file = req.files.foo;
+              file.mv("./public/image/pilote/"+file.name, function (err,res){
+                if (err) {
+                  console.log(err);
+                } else {
+                  console.log('Upload');
+                }
+              });
+            }
+
+            response.listePilote = res[2];
+            response.render('pilote', response);
         }
     );
 };
