@@ -43,7 +43,7 @@ module.exports.Ajouter = function (request, response) {
 };
 
 module.exports.ajouterPilote = function (req, response) {
-    response.title = "Ajouter un pilote";
+    response.title = "Gestion des pilotes";
     data = req.body;
 
     if (data["ECUNUM"] == 'NULL') {
@@ -100,7 +100,7 @@ module.exports.ajouterPilote = function (req, response) {
 };
 
 module.exports.Modifier = function (request, response) {
-    response.title = "Ajouter un pilote";
+    response.title = "Modifier un pilote";
 
     let data = request.params.num;
 
@@ -133,14 +133,14 @@ module.exports.Modifier = function (request, response) {
 
 
 module.exports.modifierPilote = function (req, response) {
-    response.title = "Modifier un pilote";
+    response.title = "Gestion des pilotes";
     data = req.body;
 
 
     data["PILNOM"] = data["PILNOM"].split("'").join("\\\'");
     data["PILPRENOM"] = data["PILPRENOM"].split("'").join("\\\'");
     data["PILTEXTE"] = data["PILTEXTE"].split("'").join("\\\'");
-    console.log(data);
+
     function sleep (time) {
         return new Promise((resolve) => setTimeout(resolve, time));
     }
@@ -184,6 +184,58 @@ module.exports.modifierPilote = function (req, response) {
                   console.log('Upload');
                 }
               });
+            }
+
+            response.listePilote = res[2];
+            response.render('pilote', response);
+        }
+    );
+};
+
+module.exports.Supprimer = function (request, response) {
+    response.title = "Supprimer un pilote";
+    let data = request.params.num;
+    model.getInfoPilote( data,function (err, result) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
+        }
+        response.pilote = result[0];
+    response.render('supprimmerPilote', response);
+    });
+};
+
+module.exports.supprimmerPilote = function (req, response) {
+    response.title = "Gestion des pilotes";
+    data = req.body;
+
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+
+    async.parallel ([
+            function (callback) {
+              sleep(100).then(() => {
+                model.supprimerPilote(data["id"], function (err, res) {callback(null,res)});
+              });
+            },
+            function (callback) {
+                model.supprimerPhoto(data["id"],function (err, res) {callback(null,res)});
+            },
+            function (callback) {
+              sleep(200).then(() => {
+                  model.getListePilote( function (err, res) {callback(null,res)});
+              });
+            },
+        ],
+
+        function (err, res) {
+            if (err) {
+                // gestion de l'erreur
+                console.log(err);
+                return;
             }
 
             response.listePilote = res[2];

@@ -17,6 +17,9 @@ module.exports = function(app){
   app.post('/ajouterPilote', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.ajouterPilote);
   app.get('/modifierPilote/:num', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.Modifier);
   app.post('/modifierPilote/:num', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.modifierPilote);
+  app.get('/supprimmerPilote/:num', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.Supprimer);
+  app.post('/supprimmerPilote/:num', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.supprimmerPilote);
+
 
   // tout le reste
   app.get('*',AuthentificationController.VerifierUtilisateurEstConnecte,HomeAdminController.NotFound);

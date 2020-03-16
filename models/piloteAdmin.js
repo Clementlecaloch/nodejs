@@ -101,3 +101,23 @@ module.exports.modifierPhoto = function (photo,id, callback) {
         }
     });
 };
+
+module.exports.supprimerPilote = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM pilote where PILNUM = " + id;
+          connexion.query(sql,data,callback);
+          connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerPhoto = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM photo where PILNUM = " + id;
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};
