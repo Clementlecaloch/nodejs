@@ -136,6 +136,10 @@ module.exports.modifierPilote = function (req, response) {
     response.title = "Modifier un pilote";
     data = req.body;
 
+
+    data["PILNOM"] = data["PILNOM"].split("'").join("\\\'");
+    data["PILPRENOM"] = data["PILPRENOM"].split("'").join("\\\'");
+    data["PILTEXTE"] = data["PILTEXTE"].split("'").join("\\\'");
     console.log(data);
     function sleep (time) {
         return new Promise((resolve) => setTimeout(resolve, time));
