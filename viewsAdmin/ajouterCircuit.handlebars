@@ -1,0 +1,20 @@
+<h1>Ajouter un circuit</h1>
+<form action="#" method="post" enctype="multipart/form-data">
+    <label>Nom</label>
+    <input name="CIRNOM" type="text" required>
+    <label>Longueur (mètre)</label>
+    <input name="CIRLONGUEUR" type="number" required>
+    <label>Nationalité</label>
+    <select name="PAYNUM">
+        {{#each listePays}}
+            <option value="{{{this.paynum}}}">{{this.paynom}}</option>
+        {{/each}}
+    </select>
+    <label >Image</label>
+    <input name="foo" type="file">
+    <label>Nombre de spectateurs</label>
+    <input name="CIRNBSPECTATEURS" type="number" required>
+    <label>Description</label>
+    <textarea name="CIRTEXT" id="" cols="30" rows="10"></textarea>
+    <input class="valider" type="submit">
+</form>

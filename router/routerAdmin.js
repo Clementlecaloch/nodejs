@@ -1,6 +1,8 @@
 let HomeAdminController = require('./../controllers/HomeAdminController');
 let AuthentificationController = require('./../controllers/AuthentificationController');
 let PiloteAdminController = require('./../controllers/PiloteAdminController');
+let CircuitAdminController = require('./../controllers/CircuitAdminController');
+
 
 
 // Routes
@@ -19,6 +21,13 @@ module.exports = function(app){
   app.post('/modifierPilote/:num', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.modifierPilote);
   app.get('/supprimmerPilote/:num', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.Supprimer);
   app.post('/supprimmerPilote/:num', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.supprimmerPilote);
+
+
+  // Routes CIRCUITS
+  app.get('/circuitAdmin', AuthentificationController.VerifierUtilisateurEstConnecte,CircuitAdminController.Index);
+  app.get('/ajouterCircuit', AuthentificationController.VerifierUtilisateurEstConnecte,CircuitAdminController.Ajouter);
+  app.post('/ajouterCircuit', AuthentificationController.VerifierUtilisateurEstConnecte,CircuitAdminController.ajouterCircuit);
+
 
 
   // tout le reste
