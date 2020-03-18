@@ -32,11 +32,9 @@ module.exports.Ajouter = function (request, response) {
 module.exports.ajouterCircuit = function (req, response) {
     response.title = "Gestion des Circuits";
     data = req.body;
-    console.log(data);
 
     data["CIRNOM"] = data["CIRNOM"].split("'").join("\\\'");
     data["CIRTEXT"] = data["CIRTEXT"].split("'").join("\\\'");
-
 
     if (!req.files || Object.keys(req.files).length === 0) {
       file.name = null;
@@ -51,9 +49,6 @@ module.exports.ajouterCircuit = function (req, response) {
       });
 
     }
-
-    console.log(data);
-
 
     async.parallel ([
             function (callback) {
@@ -71,9 +66,7 @@ module.exports.ajouterCircuit = function (req, response) {
                 return;
             }
 
-
             response.listePays = res[0];
-
             response.render('ajouterCircuit', response);
         }
     );
