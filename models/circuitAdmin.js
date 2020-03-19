@@ -72,3 +72,13 @@ module.exports.modifierPhoto = function (photo,id, callback) {
         }
     });
 };
+
+module.exports.supprimerCircuit = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM CIRCUIT where CIRNUM = " + id;
+          connexion.query(sql,data,callback);
+          connexion.release();
+        }
+    });
+};

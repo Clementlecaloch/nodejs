@@ -159,3 +159,51 @@ module.exports.modifierCircuit = function (req, response) {
         }
     );
 };
+
+module.exports.Supprimer = function (request, response) {
+    response.title = "Supprimer un circuit";
+    let data = request.params.num;
+    model.getInfoCircuit( data,function (err, result) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
+        }
+        response.circuit = result[0];
+    response.render('supprimerCircuit', response);
+    });
+};
+
+
+module.exports.supprimerCircuit = function (req, response) {
+    response.title = "Gestion des pilotes";
+    data = req.body;
+
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+
+    async.parallel ([
+            function (callback) {
+                model.supprimerCircuit(data["id"], function (err, res) {callback(null,res)});
+            },
+            function (callback) {
+              sleep(100).then(() => {
+                  model.getListeCircuit( function (err, res) {callback(null,res)});
+              });
+            },
+        ],
+
+        function (err, res) {
+            if (err) {
+                // gestion de l'erreur
+                console.log(err);
+                return;
+            }
+
+            response.listeCircuit = res[1];
+            response.render('circuits', response);
+        }
+    );
+};
