@@ -50,7 +50,7 @@ module.exports.ajouterPilote = function (req, response) {
         delete data["ECUNUM"];
     }
     if (!req.files || Object.keys(req.files).length === 0) {
-      file.name = null;
+      file.name = 'null.png';
     }else {
       file = req.files.foo;
       file.mv("./public/image/pilote/"+file, function (err,res){

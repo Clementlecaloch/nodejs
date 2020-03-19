@@ -7,17 +7,17 @@
     <label>Date de naissance</label>
     <input name="PILDATENAIS" type="date" value={{formatDate pilote.pildatenais 'YYYY-MM-DD'}}>
     <label>Nationalité</label>
-    <select name="PAYNUM">
+    <select name="PAYNUM" id="nationalite">
         {{#each nationalite}}
             <option value="{{{this.paynum}}}" >{{this.paynat}}</option>
         {{/each}}
     </select>
     <label>Ecurie</label>
-    <select name="ECUNUM">
-        <option value="NULL">Pas d'écurie</option>
-        {{#each ecurie}}
-            <option value="{{{this.ecunum}}}">{{this.ecunom}}</option>
-        {{/each}}
+    <select name="ECUNUM" id="ecurie">
+      <option value="NULL">Pas d'écurie</option>
+      {{#each ecurie}}
+          <option value="{{{this.ecunum}}}">{{this.ecunom}}</option>
+      {{/each}}
     </select>
     <label>Points</label>
     <input name="PILPOINTS" type="number" value="{{{pilote.pilpoints}}}">
@@ -33,3 +33,9 @@
     <input name="id" class="display-none" type="text" value="{{{pilote.pilnum}}}">
     <input class="valider" type="submit" value="Modifier">
 </form>
+
+
+<script type="text/javascript">
+  document.getElementById('ecurie').value={{{pilote.ecunum}}};
+  document.getElementById('nationalite').value={{{pilote.paynum}}};
+</script>
