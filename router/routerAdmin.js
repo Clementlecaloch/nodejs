@@ -2,6 +2,7 @@ let HomeAdminController = require('./../controllers/HomeAdminController');
 let AuthentificationController = require('./../controllers/AuthentificationController');
 let PiloteAdminController = require('./../controllers/PiloteAdminController');
 let CircuitAdminController = require('./../controllers/CircuitAdminController');
+let EcurieAdminController = require('./../controllers/EcurieAdminController');
 
 
 
@@ -13,7 +14,7 @@ module.exports = function(app){
   app.get('/', HomeAdminController.Index);
   app.post('/', HomeAdminController.Connexion);
 
-  // Routes Pilotes
+  // Routes PILOTES
   app.get('/piloteAdmin', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.Index);
   app.get('/ajouterPilote', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.Ajouter);
   app.post('/ajouterPilote', AuthentificationController.VerifierUtilisateurEstConnecte,PiloteAdminController.ajouterPilote);
@@ -32,6 +33,12 @@ module.exports = function(app){
   app.get('/supprimerCircuit/:num', AuthentificationController.VerifierUtilisateurEstConnecte,CircuitAdminController.Supprimer);
   app.post('/supprimerCircuit/:num', AuthentificationController.VerifierUtilisateurEstConnecte,CircuitAdminController.supprimerCircuit);
 
+  //Routes ECURIES
+  app.get('/ecurieAdmin', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.Index);
+  app.get('/ajouterEcurie', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.Ajouter);
+  app.post('/ajouterEcurie', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.ajouterEcurie);
+  app.get('/modifierEcurie/:num', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.Modifier);
+  app.post('/modifierEcurie/:num', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.modifierEcurie);
 
 
   // tout le reste

@@ -1,0 +1,20 @@
+<h1>Ajouter un ecurie</h1>
+<form action="#" method="post" enctype="multipart/form-data">
+    <label>Nom</label>
+    <input name="ECUNOM" type="text" required>
+    <label>Directeur</label>
+    <input name="ECUNOMDIR" type="text" required>
+    <label>Adresse de siege</label>
+    <textarea name="ECUADRSIEGE" rows="3"></textarea>
+    <label>Points</label>
+    <input name="ECUPOINTS" type="number" required>
+    <label>Nationalité</label>
+    <select name="PAYNUM">
+        {{#each listePays}}
+            <option value="{{{this.paynum}}}">{{this.paynom}}</option>
+        {{/each}}
+    </select>
+    <label >Image</label>
+    <input name="foo" type="file">
+    <input class="valider" type="submit">
+</form>
