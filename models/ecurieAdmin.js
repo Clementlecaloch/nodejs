@@ -73,10 +73,10 @@ module.exports.modifierPhoto = function (photo,id, callback) {
     });
 };
 
-module.exports.supprimerCircuit = function (id, callback) {
+module.exports.supprimerEcurie = function (id, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-          let sql = "DELETE FROM CIRCUIT where CIRNUM = " + id;
+          let sql = "DELETE FROM ECURIE where ECUNUM = " + id;
           connexion.query(sql,data,callback);
           connexion.release();
         }

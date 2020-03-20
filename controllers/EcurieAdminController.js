@@ -172,13 +172,13 @@ module.exports.Supprimer = function (request, response) {
             return;
         }
         response.ecurie = result[0];
-    response.render('supprimerCircuit', response);
+    response.render('supprimerEcurie', response);
     });
 };
 
 
-module.exports.supprimerCircuit = function (req, response) {
-    response.title = "Gestion des pilotes";
+module.exports.supprimerEcurie = function (req, response) {
+    response.title = "Gestion des Ecuries";
     data = req.body;
 
     function sleep (time) {
@@ -188,11 +188,11 @@ module.exports.supprimerCircuit = function (req, response) {
 
     async.parallel ([
             function (callback) {
-                model.supprimerCircuit(data["id"], function (err, res) {callback(null,res)});
+                model.supprimerEcurie(data["id"], function (err, res) {callback(null,res)});
             },
             function (callback) {
               sleep(100).then(() => {
-                  model.getListeCircuit( function (err, res) {callback(null,res)});
+                  model.getListeEcurie(function (err, res) {callback(null,res)});
               });
             },
         ],
@@ -204,8 +204,8 @@ module.exports.supprimerCircuit = function (req, response) {
                 return;
             }
 
-            response.listeCircuit = res[1];
-            response.render('circuits', response);
+            response.listeEcurie = res[1];
+            response.render('ecurie', response);
         }
     );
 };

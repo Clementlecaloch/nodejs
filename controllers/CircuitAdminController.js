@@ -176,7 +176,7 @@ module.exports.Supprimer = function (request, response) {
 
 
 module.exports.supprimerCircuit = function (req, response) {
-    response.title = "Gestion des pilotes";
+    response.title = "Gestion des circuits";
     data = req.body;
 
     function sleep (time) {

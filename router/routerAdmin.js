@@ -39,6 +39,8 @@ module.exports = function(app){
   app.post('/ajouterEcurie', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.ajouterEcurie);
   app.get('/modifierEcurie/:num', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.Modifier);
   app.post('/modifierEcurie/:num', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.modifierEcurie);
+  app.get('/supprimerEcurie/:num', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.Supprimer);
+  app.post('/supprimerEcurie/:num', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.supprimerEcurie);
 
 
   // tout le reste
