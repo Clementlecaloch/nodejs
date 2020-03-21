@@ -42,7 +42,7 @@ module.exports = function(app){
   app.get('/supprimerEcurie/:num', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.Supprimer);
   app.post('/supprimerEcurie/:num', AuthentificationController.VerifierUtilisateurEstConnecte,EcurieAdminController.supprimerEcurie);
 
-
+  app.get('/site', AuthentificationController.VerifierUtilisateurEstConnecte,HomeAdminController.Site);
   // tout le reste
   app.get('*',AuthentificationController.VerifierUtilisateurEstConnecte,HomeAdminController.NotFound);
   app.post('*',AuthentificationController.VerifierUtilisateurEstConnecte,HomeAdminController.NotFound);

@@ -1,8 +1,6 @@
 let db = require('../configDb');
 let model = require('../models/homeAdmin.js');
 let Cryptr = require('cryptr')
-  // ////////////////////////////////////////////// A C C U E I L
-
 
 module.exports.Index = function (request, response) {
     response.title = "Bienvenue du côté administrateur sur le site de SIXVOIX (IUT du Limousin).";
@@ -34,6 +32,9 @@ module.exports.Connexion = function (request, response) {
 
 };
 
+module.exports.Site = function(request, response){
+  response.status(301).redirect('http://localhost:6800');
+};
 
 module.exports.NotFound = function(request, response){
     response.title = "Bienvenue du côté administrateur sur le site de SIXVOIX (IUT du Limousin).";
