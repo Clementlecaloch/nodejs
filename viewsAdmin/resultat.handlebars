@@ -1,0 +1,12 @@
+<div class="center">
+    <img src="/image/cat_resultat.png" alt="">
+    <h1>Gestion des resultats</h1>
+    <form action="/resultatTemps" method="get" class="formulaire1">
+      <select name="gpnum">
+          {{#each listeGrandPrix}}
+              <option value="{{{this.gpnum}}}">{{this.gpnom}}</option>
+          {{/each}}
+      </select>
+      <input class="valider" type="submit" value="Valider">
+    </form>
+</div>

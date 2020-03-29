@@ -1,0 +1,34 @@
+<div class="center">
+    <table>
+        <tr>
+            <th></th>
+            <th>Place</th>
+            <th>Nom / Prenom</th>
+            <th>Temps</th>
+            <th>Points</th>
+        </tr>
+        {{#each resultat}}
+            <tr>
+                <td><a href="/supprimerTemps/{{{this.pilnum}}}_{{this.gpnum}}"><img src="/image/act_delete.png" alt=""></td>
+                <td>{{this.row_number}}</td>
+                <td>{{this.pilnom}} {{this.pilprenom}}</td>
+                <td>{{this.tempscourse}}</td>
+                <td>{{#if this.ptnbpointsplace}} {{this.ptnbpointsplace}} {{else}} 0 {{/if}}</td>
+            </tr>
+        {{/each}}
+        <form action="#" method="post">
+          <tr>
+            <td>Ajouter</td>
+            <td></td>
+            <td>  <select name="PILNUM" required>
+                  {{#each pilote}}
+                      <option value="{{{this.pilnum}}}">{{this.pilnom}} {{this.pilprenom}}</option>
+                  {{/each}}
+                  </select> </td>
+            <td><input type="number" name="heures" min="0" max="999" required> : <input type="number" name="minutes" min="0" max="59" required> : <input type="number" name="secondes"min="0" max="59"required>  </td>
+            <input name="id" class="display-none" type="text" value="{{{gpnum}}}">
+            <td><input class="valider" type="submit" value="OK"></td>
+          </tr>
+        </form>
+    </table>
+</div>

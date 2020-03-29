@@ -32,7 +32,7 @@ module.exports.getInfoResultatPrix = function (num, callback) {
             let sql = "select row_number, pilnom, pilprenom, tempscourse, ptnbpointsplace from ";
 						sql = sql + "(SELECT @row_number:=@row_number+1 AS row_number ,pilnom, pilprenom, tempscourse from course c join pilote p on c.pilnum = p.pilnum ";
 						sql = sql + "JOIN (SELECT @row_number := 0 FROM DUAL) as sub "
-						sql = sql + "where c.gpnum =" + num +" order by tempscourse asc limit 10) t join points p on p.PTPLACE=t.row_number ";
+						sql = sql + "where c.gpnum =" + num +" order by tempscourse asc) t left join points p on p.PTPLACE=t.row_number ";
 						connexion.query(sql,callback);
             connexion.release();
         }

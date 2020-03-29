@@ -227,3 +227,8 @@ label {
 .display-none {
 	display: none;
 }
+
+.formulaire1{
+  display: flex;
+  flex-direction: column
+}

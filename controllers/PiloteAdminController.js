@@ -49,16 +49,18 @@ module.exports.ajouterPilote = function (req, response) {
     if (data["ECUNUM"] == 'NULL') {
         delete data["ECUNUM"];
     }
+
     if (!req.files || Object.keys(req.files).length === 0) {
-      file.name = 'null.png';
+      file = 'null.png';
     }else {
       file = req.files.foo;
-      file.mv("./public/image/pilote/"+file, function (err,res){
+      file.mv("./public/image/pilote/"+file.name, function (err,res){
         if (err) {
           console.log(err);
         } else {
           console.log('Upload');
         }
+        file = file.name
       });
     }
 
@@ -78,7 +80,7 @@ module.exports.ajouterPilote = function (req, response) {
             },
             function (callback) {
                 sleep(100).then(() => {
-                    model.ajouterPhoto(file.name,function (err, res) {callback(null,res)});
+                    model.ajouterPhoto(file,function (err, res) {callback(null,res)});
                 });
             },
         ],

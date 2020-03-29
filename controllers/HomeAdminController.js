@@ -20,7 +20,6 @@ module.exports.Connexion = function (request, response) {
           return;
       }
       let decryptedString = cryptr.decrypt(result[0].passwd);
-      console.log('dd');
       if (result[0].login == request.body.login && decryptedString == request.body.mpd) {
         request.session.admin = true;
       } else {

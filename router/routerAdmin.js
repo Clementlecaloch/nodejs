@@ -4,6 +4,7 @@ let PiloteAdminController = require('./../controllers/PiloteAdminController');
 let CircuitAdminController = require('./../controllers/CircuitAdminController');
 let EcurieAdminController = require('./../controllers/EcurieAdminController');
 let SponsorAdminController = require('./../controllers/SponsorAdminController');
+let ResultatAdminController = require('./../controllers/ResultatAdminController');
 
 
 // Routes
@@ -46,6 +47,13 @@ module.exports = function(app){
   app.get('/sponsorAdmin', AuthentificationController.VerifierUtilisateurEstConnecte,SponsorAdminController.Index);
   app.get('/ajouterSponsor', AuthentificationController.VerifierUtilisateurEstConnecte,SponsorAdminController.Ajouter);
   app.post('/ajouterSponsor', AuthentificationController.VerifierUtilisateurEstConnecte,SponsorAdminController.ajouterSponsor);
+
+  //Routes RESULTAT
+    app.get('/resultatAdmin', AuthentificationController.VerifierUtilisateurEstConnecte,ResultatAdminController.Index);
+    app.get('/resultatTemps', AuthentificationController.VerifierUtilisateurEstConnecte,ResultatAdminController.Temps);
+    app.post('/resultatTemps', AuthentificationController.VerifierUtilisateurEstConnecte,ResultatAdminController.ajouterTemps);
+    app.get('/supprimerTemps/:num', AuthentificationController.VerifierUtilisateurEstConnecte,ResultatAdminController.supprimerTemps);
+
 
   //Routes Vers le site
   app.get('/site', AuthentificationController.VerifierUtilisateurEstConnecte,HomeAdminController.Site);
