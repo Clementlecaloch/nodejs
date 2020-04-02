@@ -41,7 +41,6 @@ module.exports.Temps = function (req, response) {
             response.resultat = res[0];
             response.pilote = res[1];
             response.gpnum = data;
-            console.log(response.gpnum);
             response.render('resultatTemps', response);
         }
     );
@@ -50,39 +49,14 @@ module.exports.Temps = function (req, response) {
 module.exports.ajouterTemps = function (req, response) {
     response.title = "Gestion des resultats";
     data = req.body;
-
-    function sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
-
-
-    async.parallel ([
-          function (callback) {
-              sleep(100).then(() => {
-                model.getInfoResultatPrix(data["id"], function (err, res) {callback(null,res)});
-              })
-          },
-          function (callback) {
-              model.getListePilote(function (err, res) {callback(null,res)});
-          },
-          function (callback){
-              model.ajouterTemps(data, function (err, res) {callback(null,res)});
-          },
-      ],
-
-      function (err, res) {
-          if (err) {
-              // gestion de l'erreur
-              console.log(err);
-              return;
-          }
-
-          response.resultat = res[0];
-          response.pilote = res[1];
-          response.gpnum = data["id"];
-          response.render('resultatTemps', response);
+    model.ajouterTemps(data, function (err, result) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
         }
-    );
+        response.status(301).redirect(req.baseUrl+'/resultatTemps?gpnum='+data["id"]);
+    });          
 };
 
 module.exports.supprimerTemps = function (req, response) {

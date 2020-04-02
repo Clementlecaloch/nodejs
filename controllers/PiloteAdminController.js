@@ -70,12 +70,6 @@ module.exports.ajouterPilote = function (req, response) {
 
     async.parallel ([
             function (callback) {
-                model.getNationalitePilote(function (err, res) {callback(null,res)});
-            },
-            function (callback) {
-                model.getNomEcurie(function (err, res) {callback(null,res)});
-            },
-            function (callback) {
                 model.ajouterPilote(data, function (err, res) {callback(null,res)});
             },
             function (callback) {
@@ -92,11 +86,7 @@ module.exports.ajouterPilote = function (req, response) {
                 return;
             }
 
-
-
-            response.nationalite = res[0];
-            response.ecurie = res[1];
-            response.render('ajouterPilote', response);
+            response.status(301).redirect(req.baseUrl+'/ajouterPilote');
         }
     );
 };
@@ -160,12 +150,6 @@ module.exports.modifierPilote = function (req, response) {
                 model.modifierPhoto(file.name,data["id"],function (err, res) {callback(null,res)});
               }
             },
-
-            function (callback) {
-              sleep(100).then(() => {
-                  model.getListePilote( function (err, res) {callback(null,res)});
-              });
-            },
         ],
 
         function (err, res) {
@@ -188,8 +172,7 @@ module.exports.modifierPilote = function (req, response) {
               });
             }
 
-            response.listePilote = res[2];
-            response.render('pilote', response);
+            response.status(301).redirect(req.baseUrl+'/piloteAdmin');
         }
     );
 };
@@ -226,11 +209,6 @@ module.exports.supprimmerPilote = function (req, response) {
             function (callback) {
                 model.supprimerPhoto(data["id"],function (err, res) {callback(null,res)});
             },
-            function (callback) {
-              sleep(200).then(() => {
-                  model.getListePilote( function (err, res) {callback(null,res)});
-              });
-            },
         ],
 
         function (err, res) {
@@ -240,8 +218,7 @@ module.exports.supprimmerPilote = function (req, response) {
                 return;
             }
 
-            response.listePilote = res[2];
-            response.render('pilote', response);
+            response.status(301).redirect(req.baseUrl+'/piloteAdmin');
         }
     );
 };

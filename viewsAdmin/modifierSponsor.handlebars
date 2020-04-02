@@ -1,0 +1,19 @@
+<h1>Ajouter un sponsor</h1>
+<form action="#" method="post">
+    <label>Nom</label>
+    <input name="SPONOM" type="text" value="{{sponsor.SPONOM}}" required>
+    <label>Secteur d'activité</label>
+    <input name="SPOSECTACTIVITE" value="{{sponsor.SPOSECTACTIVITE}}" type="text" required>
+    <label>Ecurie sponsorisées</label>
+    <select name="ECUNUM" id="ecurie">
+      <option value="-1">Pas d'écurie</option>
+        {{#each listeEcurie}}
+            <option value="{{{this.ecunum}}}">{{this.ecunom}}</option>
+        {{/each}}
+    </select>
+    <input class="valider" type="submit">
+</form>
+
+<script type="text/javascript">
+  document.getElementById('ecurie').value={{{finance.ECUNUM}}};
+</script>

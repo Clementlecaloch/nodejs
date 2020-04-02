@@ -50,3 +50,64 @@ module.exports.ajouterFinance = function (ecurie, callback) {
         }
     });
 };
+
+module.exports.ajouterFinance2 = function (ecurie,num, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "insert into finance (SPONUM,ECUNUM) values ("+num+","+ecurie+")";
+            connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getInfoSponsor = function (sponsor, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "Select SPONOM, SPOSECTACTIVITE from sponsor where SPONUM = "+sponsor;
+            connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getInfoSponsor = function (sponsor, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "Select SPONOM, SPOSECTACTIVITE from sponsor where SPONUM = "+sponsor;
+            connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.getInfoFinance = function (sponsor, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "Select ECUNUM from finance where SPONUM = "+sponsor;
+            connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerFinance = function (num, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "delete from finance where SPONUM =" +num;
+            connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};
+
+
+module.exports.modifierSponsor = function (data,num, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "update sponsor set SPONOM = '"+data["SPONOM"]+"', SPOSECTACTIVITE = '"+data["SPOSECTACTIVITE"]+"' WHERE SPONUM ="+num;
+            connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};
