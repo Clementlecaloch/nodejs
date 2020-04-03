@@ -1,8 +1,15 @@
 {{> listeRepPiloPartial}}
 
+<div class="CATALOQUE">
+
 {{#each phoPilote}}
-    <a href="../detailPilote/{{{this.pilnum}}}">
-        <img src="/image/pilote/{{{this.phoadresse}}}">
-        <p>{{this.pilnom}} {{this.pilprenom}}</p>
-    </a>
+<div class="icone">
+  <a href="../detailPilote/{{{this.pilnum}}}">
+      <img src="/image/pilote/{{{this.phoadresse}}}" class="imageVignette">
+      <p>{{this.pilnom}} {{this.pilprenom}}</p>
+  </a>
+</div>
 {{/each}}
+
+
+</div>

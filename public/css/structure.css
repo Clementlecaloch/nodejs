@@ -171,11 +171,25 @@
 .infobulle:hover span, .piloteEcurie:focus span{
     transform:scale(1);
 }
-	.center td, th {
+
+.center td, th {
 	border: 1px solid black;
 	padding: 5px;
 }
 
+.imageVignette {
+  height: 150px;
+  width: 150px;
+}
+.CATALOQUE{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.icone {
+  flex: 1 0 21%; /* explanation below */
+}
 .grandPrixRes {
   display: flex;
   justify-content: center;
