@@ -137,6 +137,8 @@ module.exports.modifierPilote = function (req, response) {
         return new Promise((resolve) => setTimeout(resolve, time));
     }
 
+    console.log(data);
+
 
     async.parallel ([
             function (callback) {
@@ -147,6 +149,9 @@ module.exports.modifierPilote = function (req, response) {
                 callback(null,null);
               }else {
                 let file = req.files.foo;
+                if (file.name) {
+
+                }
                 model.modifierPhoto(file.name,data["id"],function (err, res) {callback(null,res)});
               }
             },
@@ -215,6 +220,7 @@ module.exports.supprimmerPilote = function (req, response) {
             if (err) {
                 // gestion de l'erreur
                 console.log(err);
+                response.status(301).redirect(req.baseUrl+'/piloteAdmin');
                 return;
             }
 

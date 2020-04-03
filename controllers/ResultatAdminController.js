@@ -29,6 +29,9 @@ module.exports.Temps = function (req, response) {
             function (callback) {
                 model.getListePilote(function (err, res) {callback(null,res)});
             },
+            function (callback) {
+                model.getNomGP(data,function (err, res) {callback(null,res)});
+            },
         ],
 
         function (err, res) {
@@ -41,6 +44,7 @@ module.exports.Temps = function (req, response) {
             response.resultat = res[0];
             response.pilote = res[1];
             response.gpnum = data;
+            response.gpnom = res[2][0];
             response.render('resultatTemps', response);
         }
     );
@@ -56,7 +60,7 @@ module.exports.ajouterTemps = function (req, response) {
             return;
         }
         response.status(301).redirect(req.baseUrl+'/resultatTemps?gpnum='+data["id"]);
-    });          
+    });
 };
 
 module.exports.supprimerTemps = function (req, response) {

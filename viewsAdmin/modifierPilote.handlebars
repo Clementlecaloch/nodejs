@@ -20,7 +20,7 @@
       {{/each}}
     </select>
     <label>Points</label>
-    <input name="PILPOINTS" type="number" value="{{{pilote.pilpoints}}}">
+    <input name="PILPOINTS" type="number" {{#if pilote.pilpoints}} value="{{{pilote.pilpoints}}}"{{else}} value="0" {{/if}}>
     <label>Poids</label>
     <input name="PILPOIDS" type="number" value="{{{pilote.pilpoids}}}">
     <label>Taille</label>

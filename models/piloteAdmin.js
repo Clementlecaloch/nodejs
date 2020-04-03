@@ -51,9 +51,9 @@ module.exports.getNomEcurie = function (callback) {
 module.exports.getInfoPilote = function (num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-            let sql = "select p.pilnum, phoadresse, pilnom, pilprenom, pildatenais,pilpoints, pilpoids, piltaille, p.ecunum, p.paynum, piltexte from pilote p " +
-                "left join ecurie e on p.ecunum = e.ecunum join photo ph on p.pilnum = ph.pilnum " +
-                "where ph.phonum = 1 and p.pilnum = " + num;
+            let sql = "select p.pilnum, pilnom, pilprenom, pildatenais,pilpoints, pilpoids, piltaille, p.ecunum, p.paynum, piltexte from pilote p " +
+                "left join ecurie e on p.ecunum = e.ecunum " +
+                "where p.pilnum = " + num;
             connexion.query(sql,callback);
             connexion.release();
         }
@@ -84,8 +84,8 @@ module.exports.modifierPilote = function (data, callback) {
         if(!err) {
           let sql = "update pilote SET pilnom = '" + data["PILNOM"] +"',  pilprenom = '" + data["PILPRENOM"] +"', pildatenais = '" + data["PILDATENAIS"] +"', " +
             " piltexte = '" + data["PILTEXTE"] +"', pilpoids = " + data["PILPOIDS"] +", piltaille = " + data["PILTAILLE"] +", pilpoints = " + data["PILPOINTS"] +", ecunum = " + data["ECUNUM"] +" "+
-            "where pilnum = " + data["id"]
-
+            ", paynum = "+ data["PAYNUM"]+" where pilnum = " + data["id"]
+          console.log(sql);
           connexion.query(sql,data,callback);
           connexion.release();
         }

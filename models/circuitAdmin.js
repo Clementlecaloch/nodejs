@@ -67,6 +67,8 @@ module.exports.modifierPhoto = function (photo,id, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
           let sql = "update circuit SET CIRADRESSEIMAGE = '"+photo+"' where cirnum = " + id ;
+
+          console.log(sql);
           connexion.query(sql,callback);
           connexion.release();
         }

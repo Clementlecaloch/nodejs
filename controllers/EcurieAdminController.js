@@ -41,36 +41,30 @@ module.exports.ajouterEcurie = function (req, response) {
       file.name = 'null.png';
     }else {
       file = req.files.foo;
-      file.mv("./public/image/ecurie/"+file.name, function (err,res){
+      if (file.name.length > 20) {
+        name = ''.concat('ecu',data["ECUNOM"].substring(0,10),'.png')
+      }else {
+        name = file.name
+      }
+      file.mv("./public/image/ecurie/"+name, function (err,res){
         if (err) {
           console.log(err);
         } else {
           console.log('Upload');
         }
       });
-
     }
 
-    async.parallel ([
-            function (callback) {
-                model.getPaysEcurie(function (err, res) {callback(null,res)});
-            },
-            function (callback) {
-                model.ajouterEcurie(data,file.name, function (err, res) {callback(null,res)});
-            },
-        ],
+    model.ajouterEcurie(data,name, function (err, res) {
+      if (err) {
+          // gestion de l'erreur
+          console.log(err);
+          return;
+      }
+      response.status(301).redirect(req.baseUrl+'/ajouterEcurie');
 
-        function (err, res) {
-            if (err) {
-                // gestion de l'erreur
-                console.log(err);
-                return;
-            }
+    });
 
-            response.listePays = res[0];
-            response.render('ajouterEcurie', response);
-        }
-    );
 };
 
 
@@ -125,14 +119,13 @@ module.exports.modifierEcurie = function (req, response) {
                 callback(null,null);
               }else {
                 let file = req.files.foo;
-                model.modifierPhoto(file.name,data["id"],function (err, res) {callback(null,res)});
+                if (file.name.length > 20) {
+                  name = ''.concat('cir',data["id"].substring(0,10),'.png')
+                }else {
+                  name = file.name
+                }
+                model.modifierPhoto(name,data["id"],function (err, res) {callback(null,res)});
               }
-            },
-
-            function (callback) {
-              sleep(100).then(() => {
-                  model.getListeEcurie( function (err, res) {callback(null,res)});
-              });
             },
         ],
 
@@ -147,7 +140,12 @@ module.exports.modifierEcurie = function (req, response) {
 
             }else {
               file = req.files.foo;
-              file.mv("./public/image/ecurie/"+file.name, function (err,res){
+              if (file.name.length > 20) {
+                name = ''.concat('cir',data["id"].substring(0,10),'.png')
+              }else {
+                name = file.name
+              }
+              file.mv("./public/image/ecurie/"+name, function (err,res){
                 if (err) {
                   console.log(err);
                 } else {
@@ -156,8 +154,7 @@ module.exports.modifierEcurie = function (req, response) {
               });
             }
 
-            response.listeEcurie = res[2];
-            response.render('ecurie', response);
+            response.status(301).redirect(req.baseUrl+'/ecurieAdmin');
         }
     );
 };
@@ -185,27 +182,14 @@ module.exports.supprimerEcurie = function (req, response) {
         return new Promise((resolve) => setTimeout(resolve, time));
     }
 
+    model.supprimerEcurie(data["id"], function (err, res) {
+      if (err) {
+          // gestion de l'erreur
+          console.log(err);
+          response.status(301).redirect(req.baseUrl+'/ecurieAdmin');
+          return;
+      }
 
-    async.parallel ([
-            function (callback) {
-                model.supprimerEcurie(data["id"], function (err, res) {callback(null,res)});
-            },
-            function (callback) {
-              sleep(100).then(() => {
-                  model.getListeEcurie(function (err, res) {callback(null,res)});
-              });
-            },
-        ],
-
-        function (err, res) {
-            if (err) {
-                // gestion de l'erreur
-                console.log(err);
-                return;
-            }
-
-            response.listeEcurie = res[1];
-            response.render('ecurie', response);
-        }
-    );
+      response.status(301).redirect(req.baseUrl+'/ecurieAdmin');
+    });
 };

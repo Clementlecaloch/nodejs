@@ -37,10 +37,15 @@ module.exports.ajouterCircuit = function (req, response) {
     data["CIRTEXT"] = data["CIRTEXT"].split("'").join("\\\'");
 
     if (!req.files || Object.keys(req.files).length === 0) {
-      file.name = 'null.png';
+      name = 'null.png';
     }else {
       file = req.files.foo;
-      file.mv("./public/image/circuit/"+file.name, function (err,res){
+      if (file.name.length > 20) {
+        name = ''.concat('cir',data["CIRNOM"].substring(0,10),'.png')
+      }else {
+        name = file.name
+      }
+      file.mv("./public/image/circuit/"+name, function (err,res){
         if (err) {
           console.log(err);
         } else {
@@ -55,7 +60,7 @@ module.exports.ajouterCircuit = function (req, response) {
                 model.getPaysCircuit(function (err, res) {callback(null,res)});
             },
             function (callback) {
-                model.ajouterCircuit(data,file.name, function (err, res) {callback(null,res)});
+                model.ajouterCircuit(data,name, function (err, res) {callback(null,res)});
             },
         ],
 
@@ -123,10 +128,14 @@ module.exports.modifierCircuit = function (req, response) {
                 callback(null,null);
               }else {
                 let file = req.files.foo;
-                model.modifierPhoto(file.name,data["id"],function (err, res) {callback(null,res)});
+                if (file.name.length > 20) {
+                  name = ''.concat('cir',data["id"],'.png')
+                }else {
+                  name = file.name
+                }
+                model.modifierPhoto(name,data["id"],function (err, res) {callback(null,res)});
               }
             },
-
             function (callback) {
               sleep(100).then(() => {
                   model.getListeCircuit( function (err, res) {callback(null,res)});
@@ -145,7 +154,7 @@ module.exports.modifierCircuit = function (req, response) {
 
             }else {
               file = req.files.foo;
-              file.mv("./public/image/circuit/"+file.name, function (err,res){
+              file.mv("./public/image/circuit/"+name, function (err,res){
                 if (err) {
                   console.log(err);
                 } else {

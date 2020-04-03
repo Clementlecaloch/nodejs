@@ -16,7 +16,7 @@
                     <td>{{this.row_number}}</td>
                     <td>{{this.pilnom}} {{this.pilprenom}}</td>
                     <td>{{this.tempscourse}}</td>
-                    <td>{{this.ptnbpointsplace}}</td>
+                    <td>{{#if this.ptnbpointsplace}} {{this.ptnbpointsplace}} {{else}} 0 {{/if}}</td>
                 </tr>
             {{/each}}
         </table>
@@ -24,5 +24,3 @@
 
 </div>
     <p class="justify">{{infoGP.gpcommentaire}}</p>
-
-
