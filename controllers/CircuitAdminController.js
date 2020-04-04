@@ -30,7 +30,6 @@ module.exports.Ajouter = function (request, response) {
 
 
 module.exports.ajouterCircuit = function (req, response) {
-    response.title = "Gestion des Circuits";
     data = req.body;
 
     data["CIRNOM"] = data["CIRNOM"].split("'").join("\\\'");
@@ -45,6 +44,7 @@ module.exports.ajouterCircuit = function (req, response) {
       }else {
         name = file.name
       }
+
       file.mv("./public/image/circuit/"+name, function (err,res){
         if (err) {
           console.log(err);
@@ -55,26 +55,15 @@ module.exports.ajouterCircuit = function (req, response) {
 
     }
 
-    async.parallel ([
-            function (callback) {
-                model.getPaysCircuit(function (err, res) {callback(null,res)});
-            },
-            function (callback) {
-                model.ajouterCircuit(data,name, function (err, res) {callback(null,res)});
-            },
-        ],
-
-        function (err, res) {
-            if (err) {
-                // gestion de l'erreur
-                console.log(err);
-                return;
-            }
-
-            response.listePays = res[0];
-            response.render('ajouterCircuit', response);
+    model.ajouterCircuit(data,name, function (err, res) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
         }
-    );
+
+        response.status(301).redirect(req.baseUrl+'/ajouterCircuit');
+    });
 };
 
 
@@ -107,17 +96,11 @@ module.exports.Modifier = function (request, response) {
 };
 
 module.exports.modifierCircuit = function (req, response) {
-    response.title = "Gestion des circuits";
+    let num = req.params.num;
     data = req.body;
 
     data["CIRNOM"] = data["CIRNOM"].split("'").join("\\\'");
     data["CIRTEXT"] = data["CIRTEXT"].split("'").join("\\\'");
-
-
-    function sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
-
 
     async.parallel ([
             function (callback) {
@@ -129,17 +112,12 @@ module.exports.modifierCircuit = function (req, response) {
               }else {
                 let file = req.files.foo;
                 if (file.name.length > 20) {
-                  name = ''.concat('cir',data["id"],'.png')
+                  name = ''.concat('cir',num,'.png')
                 }else {
                   name = file.name
                 }
-                model.modifierPhoto(name,data["id"],function (err, res) {callback(null,res)});
+                model.modifierPhoto(name,num,function (err, res) {callback(null,res)});
               }
-            },
-            function (callback) {
-              sleep(100).then(() => {
-                  model.getListeCircuit( function (err, res) {callback(null,res)});
-              });
             },
         ],
 
@@ -163,8 +141,7 @@ module.exports.modifierCircuit = function (req, response) {
               });
             }
 
-            response.listeCircuit = res[2];
-            response.render('circuits', response);
+            response.status(301).redirect(req.baseUrl+'/circuitAdmin');
         }
     );
 };
@@ -185,34 +162,16 @@ module.exports.Supprimer = function (request, response) {
 
 
 module.exports.supprimerCircuit = function (req, response) {
-    response.title = "Gestion des circuits";
-    data = req.body;
+    let num = req.params.num;
 
-    function sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
-
-
-    async.parallel ([
-            function (callback) {
-                model.supprimerCircuit(data["id"], function (err, res) {callback(null,res)});
-            },
-            function (callback) {
-              sleep(100).then(() => {
-                  model.getListeCircuit( function (err, res) {callback(null,res)});
-              });
-            },
-        ],
-
-        function (err, res) {
+    model.supprimerCircuit(num, function (err, res) {
             if (err) {
                 // gestion de l'erreur
                 console.log(err);
                 return;
             }
 
-            response.listeCircuit = res[1];
-            response.render('circuits', response);
-        }
-    );
+            response.status(301).redirect(req.baseUrl+'/circuitAdmin');
+
+        });
 };

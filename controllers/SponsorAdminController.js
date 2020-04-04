@@ -30,7 +30,6 @@ module.exports.Ajouter = function (request, response) {
 
 
 module.exports.ajouterSponsor = function (req, response) {
-    response.title = "Gestion des Sponsors";
     data = req.body;
 
 
@@ -104,7 +103,6 @@ module.exports.Modifier = function (request, response) {
 
 
 module.exports.modifierSponsor = function (req, response) {
-    response.title = "Gestion des Sponsors";
     data = req.body;
     num = req.params.num;
 
@@ -138,6 +136,53 @@ module.exports.modifierSponsor = function (req, response) {
             if (err) {
                 // gestion de l'erreur
                 console.log(err);
+                return;
+            }
+
+            response.status(301).redirect(req.baseUrl+'/sponsorAdmin');
+        }
+    );
+};
+
+module.exports.Supprimer = function (request, response) {
+    response.title = "Supprimer un sponsor";
+    let data = request.params.num;
+    model.getInfoSponsor( data,function (err, result) {
+        if (err) {
+            // gestion de l'erreur
+            console.log(err);
+            return;
+        }
+        response.sponsor = result[0];
+    response.render('supprimerSponsor', response);
+    });
+};
+
+
+module.exports.supprimerSponsor= function (req, response) {
+    let data = req.params.num;
+
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+
+    async.parallel ([
+            function (callback) {
+              sleep(100).then(() => {
+                model.supprimerSponsor(data, function (err, res) {callback(null,res)});
+              });
+            },
+            function (callback) {
+                  model.supprimerFinance(data, function (err, res) {callback(null,res)});
+            },
+        ],
+
+        function (err, res) {
+            if (err) {
+                // gestion de l'erreur
+                console.log(err);
+                response.status(301).redirect(req.baseUrl+'/sponsorAdmin');
                 return;
             }
 

@@ -111,3 +111,13 @@ module.exports.modifierSponsor = function (data,num, callback) {
         }
     });
 };
+
+module.exports.supprimerSponsor = function (num, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "delete from sponsor where SPONUM =" +num;
+            connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};

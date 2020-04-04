@@ -49,6 +49,8 @@ module.exports = function(app){
   app.post('/ajouterSponsor', AuthentificationController.VerifierUtilisateurEstConnecte,SponsorAdminController.ajouterSponsor);
   app.get('/modifierSponsor/:num', AuthentificationController.VerifierUtilisateurEstConnecte,SponsorAdminController.Modifier);
   app.post('/modifierSponsor/:num', AuthentificationController.VerifierUtilisateurEstConnecte,SponsorAdminController.modifierSponsor);
+  app.get('/supprimerSponsor/:num', AuthentificationController.VerifierUtilisateurEstConnecte,SponsorAdminController.Supprimer);
+  app.post('/supprimerSponsor/:num', AuthentificationController.VerifierUtilisateurEstConnecte,SponsorAdminController.supprimerSponsor);
 
   //Routes RESULTAT
     app.get('/resultatAdmin', AuthentificationController.VerifierUtilisateurEstConnecte,ResultatAdminController.Index);
