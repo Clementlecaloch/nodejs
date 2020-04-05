@@ -52,11 +52,11 @@ module.exports.getInfoEcurie = function (num, callback) {
     });
 };
 
-module.exports.modifierEcurie = function (data, callback) {
+module.exports.modifierEcurie = function (data,num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
           let sql = "update ecurie SET ecunom = '" + data["ECUNOM"] +"',  paynum = " + data["PAYNUM"] +", ecupoints = " + data["ECUPOINTS"] +", " +
-            " ECUADRSIEGE = '" + data["ECUADRSIEGE"] +"', ecunomdir = '" + data["ECUNOMDIR"] + "' where ecunum = " + data["id"];
+            " ECUADRSIEGE = '" + data["ECUADRSIEGE"] +"', ecunomdir = '" + data["ECUNOMDIR"] + "' where ecunum = " + num;
           connexion.query(sql,data,callback);
           connexion.release();
         }

@@ -106,7 +106,7 @@ module.exports.modifierEcurie = function (req, response) {
 
     async.parallel ([
             function (callback) {
-                model.modifierEcurie(data, function (err, res) {callback(null,res)});
+                model.modifierEcurie(data,num, function (err, res) {callback(null,res)});
             },
             function (callback) {
               if (!req.files || Object.keys(req.files).length === 0) {

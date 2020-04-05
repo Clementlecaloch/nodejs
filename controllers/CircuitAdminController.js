@@ -104,7 +104,7 @@ module.exports.modifierCircuit = function (req, response) {
 
     async.parallel ([
             function (callback) {
-                model.modifierCircuit(data, function (err, res) {callback(null,res)});
+                model.modifierCircuit(data,num, function (err, res) {callback(null,res)});
             },
             function (callback) {
               if (!req.files || Object.keys(req.files).length === 0) {

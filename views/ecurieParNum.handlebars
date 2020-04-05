@@ -3,7 +3,7 @@
 
     <div>
         <div class="rowEcurie">
-            <img src="/image/ecurie/{{{infoEcu.ecuadresseimage}}}">
+            <img src="/image/ecurie/{{{infoEcu.ecuadresseimage}}}" alt="/image/photos.png" class="imageVignette">
             <div>
                 <p><b>Nom : </b>{{infoEcu.ecunom}}</p>
                 <p><b>Directeur : </b>{{infoEcu.ecunomdir}}</p>
@@ -19,7 +19,7 @@
                 <div class="infobulle">
                     <a href="/detailPilote/{{{this.pilnum}}}">{{this.pilprenom}} {{this.pilnom}} </a>
                     <span>
-                        <img  src="/image/pilote/{{{this.phoadresse}}}" alt="">
+                        <img  src="/image/pilote/{{{this.phoadresse}}}" alt="/image/photos.png">
                         <div>
                             <p><b>{{this.pilprenom}} {{this.pilnom}} </b></p>
                             <p>{{this.piltexte}}... </p>
@@ -30,7 +30,7 @@
             <div class="touteVoitures">
                 {{#each photo}}
                     <div class="infoVoiture">
-                        <img src="/image/ecurie/voiture/{{this.voiadresseimage}}">
+                        <img src="/image/ecurie/voiture/{{this.voiadresseimage}}" alt="/image/photos.png">
                         <p>{{this.voinom}}</p>
                         <p>{{this.typelibelle}}</p>
                     </div>
@@ -41,5 +41,3 @@
         {{/if}}
     </div>
 </div>
-
-

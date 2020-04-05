@@ -52,11 +52,11 @@ module.exports.getInfoCircuit = function (num, callback) {
     });
 };
 
-module.exports.modifierCircuit = function (data, callback) {
+module.exports.modifierCircuit = function (data,num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
           let sql = "update circuit SET cirnom = '" + data["CIRNOM"] +"',  paynum = " + data["PAYNUM"] +", cirlongueur = " + data["CIRLONGUEUR"] +", " +
-            " cirtext = '" + data["CIRTEXT"] +"', cirnbspectateurs = " + data["CIRNBSPECTATEURS"] + " where cirnum = " + data["id"];
+            " cirtext = '" + data["CIRTEXT"] +"', cirnbspectateurs = " + data["CIRNBSPECTATEURS"] + " where cirnum = " +num;
           connexion.query(sql,data,callback);
           connexion.release();
         }

@@ -125,7 +125,7 @@ module.exports.Modifier = function (request, response) {
 
 
 module.exports.modifierPilote = function (req, response) {
-    let num = request.params.num;
+    let num = req.params.num;
     data = req.body;
 
 
@@ -136,7 +136,7 @@ module.exports.modifierPilote = function (req, response) {
 
     async.parallel ([
             function (callback) {
-                model.modifierPilote(data, function (err, res) {callback(null,res)});
+                model.modifierPilote(data,num, function (err, res) {callback(null,res)});
             },
             function (callback) {
               if (!req.files || Object.keys(req.files).length === 0) {
@@ -188,12 +188,11 @@ module.exports.Supprimer = function (request, response) {
 };
 
 module.exports.supprimmerPilote = function (req, response) {
-    let num = request.params.num;
+    let num = req.params.num;
 
     function sleep (time) {
         return new Promise((resolve) => setTimeout(resolve, time));
     }
-
 
     async.parallel ([
             function (callback) {
@@ -207,7 +206,7 @@ module.exports.supprimmerPilote = function (req, response) {
         ],
 
         function (err, res) {
-            response.status(301).redirect(req.baseUrl+'/piloteAdmin');
+          response.status(301).redirect(req.baseUrl+'/piloteAdmin');
         }
     );
 };

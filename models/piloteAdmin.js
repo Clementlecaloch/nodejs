@@ -79,12 +79,12 @@ module.exports.ajouterPhoto = function (photo, callback) {
     });
 };
 
-module.exports.modifierPilote = function (data, callback) {
+module.exports.modifierPilote = function (data,num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
           let sql = "update pilote SET pilnom = '" + data["PILNOM"] +"',  pilprenom = '" + data["PILPRENOM"] +"', pildatenais = '" + data["PILDATENAIS"] +"', " +
             " piltexte = '" + data["PILTEXTE"] +"', pilpoids = " + data["PILPOIDS"] +", piltaille = " + data["PILTAILLE"] +", pilpoints = " + data["PILPOINTS"] +", ecunum = " + data["ECUNUM"] +" "+
-            ", paynum = "+ data["PAYNUM"]+" where pilnum = " + data["id"]
+            ", paynum = "+ data["PAYNUM"]+" where pilnum = " + num
           console.log(sql);
           connexion.query(sql,data,callback);
           connexion.release();
@@ -106,7 +106,7 @@ module.exports.supprimerPilote = function (id, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
           let sql = "DELETE FROM pilote where PILNUM = " + id;
-          connexion.query(sql,data,callback);
+          connexion.query(sql,callback);
           connexion.release();
         }
     });
