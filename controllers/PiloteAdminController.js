@@ -43,7 +43,7 @@ module.exports.Ajouter = function (request, response) {
 };
 
 module.exports.ajouterPilote = function (req, response) {
-    response.title = "Gestion des pilotes";
+
     data = req.body;
 
     if (data["ECUNUM"] == 'NULL') {
@@ -125,19 +125,13 @@ module.exports.Modifier = function (request, response) {
 
 
 module.exports.modifierPilote = function (req, response) {
-    response.title = "Gestion des pilotes";
+    let num = request.params.num;
     data = req.body;
 
 
     data["PILNOM"] = data["PILNOM"].split("'").join("\\\'");
     data["PILPRENOM"] = data["PILPRENOM"].split("'").join("\\\'");
     data["PILTEXTE"] = data["PILTEXTE"].split("'").join("\\\'");
-
-    function sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
-
-    console.log(data);
 
 
     async.parallel ([
@@ -149,10 +143,7 @@ module.exports.modifierPilote = function (req, response) {
                 callback(null,null);
               }else {
                 let file = req.files.foo;
-                if (file.name) {
-
-                }
-                model.modifierPhoto(file.name,data["id"],function (err, res) {callback(null,res)});
+                model.modifierPhoto(file.name,num,function (err, res) {callback(null,res)});
               }
             },
         ],
@@ -197,8 +188,7 @@ module.exports.Supprimer = function (request, response) {
 };
 
 module.exports.supprimmerPilote = function (req, response) {
-    response.title = "Gestion des pilotes";
-    data = req.body;
+    let num = request.params.num;
 
     function sleep (time) {
         return new Promise((resolve) => setTimeout(resolve, time));
@@ -208,22 +198,15 @@ module.exports.supprimmerPilote = function (req, response) {
     async.parallel ([
             function (callback) {
               sleep(100).then(() => {
-                model.supprimerPilote(data["id"], function (err, res) {callback(null,res)});
+                model.supprimerPilote(num, function (err, res) {callback(null,res)});
               });
             },
             function (callback) {
-                model.supprimerPhoto(data["id"],function (err, res) {callback(null,res)});
+                model.supprimerPhoto(num,function (err, res) {callback(null,res)});
             },
         ],
 
         function (err, res) {
-            if (err) {
-                // gestion de l'erreur
-                console.log(err);
-                response.status(301).redirect(req.baseUrl+'/piloteAdmin');
-                return;
-            }
-
             response.status(301).redirect(req.baseUrl+'/piloteAdmin');
         }
     );

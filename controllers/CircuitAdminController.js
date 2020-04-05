@@ -165,13 +165,6 @@ module.exports.supprimerCircuit = function (req, response) {
     let num = req.params.num;
 
     model.supprimerCircuit(num, function (err, res) {
-            if (err) {
-                // gestion de l'erreur
-                console.log(err);
-                return;
-            }
-
             response.status(301).redirect(req.baseUrl+'/circuitAdmin');
-
         });
 };

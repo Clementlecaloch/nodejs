@@ -30,7 +30,6 @@ module.exports.Ajouter = function (request, response) {
 
 
 module.exports.ajouterEcurie = function (req, response) {
-    response.title = "Gestion des Ecuries";
     data = req.body;
 
     data["ECUNOM"] = data["ECUNOM"].split("'").join("\\\'");
@@ -97,18 +96,13 @@ module.exports.Modifier = function (request, response) {
 };
 
 module.exports.modifierEcurie = function (req, response) {
-    response.title = "Gestion des Ecuries";
+
+    let num = req.params.num;
     data = req.body;
 
     data["ECUNOM"] = data["ECUNOM"].split("'").join("\\\'");
     data["ECUNOMDIR"] = data["ECUNOMDIR"].split("'").join("\\\'");
     data["ECUADRSIEGE"] = data["ECUADRSIEGE"].split("'").join("\\\'");
-
-
-    function sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
-
 
     async.parallel ([
             function (callback) {
@@ -120,11 +114,11 @@ module.exports.modifierEcurie = function (req, response) {
               }else {
                 let file = req.files.foo;
                 if (file.name.length > 20) {
-                  name = ''.concat('cir',data["id"].substring(0,10),'.png')
+                  name = ''.concat('cir',num.substring(0,10),'.png')
                 }else {
                   name = file.name
                 }
-                model.modifierPhoto(name,data["id"],function (err, res) {callback(null,res)});
+                model.modifierPhoto(name,num,function (err, res) {callback(null,res)});
               }
             },
         ],
@@ -141,7 +135,7 @@ module.exports.modifierEcurie = function (req, response) {
             }else {
               file = req.files.foo;
               if (file.name.length > 20) {
-                name = ''.concat('cir',data["id"].substring(0,10),'.png')
+                name = ''.concat('cir',num.substring(0,10),'.png')
               }else {
                 name = file.name
               }
@@ -175,21 +169,9 @@ module.exports.Supprimer = function (request, response) {
 
 
 module.exports.supprimerEcurie = function (req, response) {
-    response.title = "Gestion des Ecuries";
-    data = req.body;
+    let num = req.params.num;
 
-    function sleep (time) {
-        return new Promise((resolve) => setTimeout(resolve, time));
-    }
-
-    model.supprimerEcurie(data["id"], function (err, res) {
-      if (err) {
-          // gestion de l'erreur
-          console.log(err);
-          response.status(301).redirect(req.baseUrl+'/ecurieAdmin');
-          return;
-      }
-
+    model.supprimerEcurie(num, function (err, res) {
       response.status(301).redirect(req.baseUrl+'/ecurieAdmin');
     });
 };

@@ -51,7 +51,6 @@ module.exports.Temps = function (req, response) {
 };
 
 module.exports.ajouterTemps = function (req, response) {
-    response.title = "Gestion des resultats";
     data = req.body;
     model.ajouterTemps(data, function (err, result) {
         if (err) {
@@ -64,18 +63,12 @@ module.exports.ajouterTemps = function (req, response) {
 };
 
 module.exports.supprimerTemps = function (req, response) {
-    response.title = "Gestion des resultats";
     let data = req.params.num;
 
     let pilnum = data.split('_')[0];
     let gpnum = data.split('_')[1];
 
       model.supprimerTemps(pilnum,gpnum,function (err, result) {
-        if (err) {
-            // gestion de l'erreur
-            console.log(err);
-            return;
-        }
         response.status(301).redirect(req.baseUrl+'/resultatTemps?gpnum='+gpnum);
     });
 };

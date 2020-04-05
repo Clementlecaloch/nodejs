@@ -179,13 +179,6 @@ module.exports.supprimerSponsor= function (req, response) {
         ],
 
         function (err, res) {
-            if (err) {
-                // gestion de l'erreur
-                console.log(err);
-                response.status(301).redirect(req.baseUrl+'/sponsorAdmin');
-                return;
-            }
-
             response.status(301).redirect(req.baseUrl+'/sponsorAdmin');
         }
     );
