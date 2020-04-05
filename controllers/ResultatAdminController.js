@@ -52,23 +52,42 @@ module.exports.Temps = function (req, response) {
 
 module.exports.ajouterTemps = function (req, response) {
     data = req.body;
-    model.ajouterTemps(data, function (err, result) {
-        if (err) {
-            // gestion de l'erreur
-            console.log(err);
-            return;
-        }
+
+    async.parallel ([
+            function (callback) {
+                model.ajouterTemps(data,function (err, res) {callback(null,res)});
+            },
+            function (callback) {
+                model.modifierMAJ(data["id"],function (err, res) {callback(null,res)});
+            },
+        ],
+
+        function (err, res) {
+            if (err) {
+                // gestion de l'erreur
+                console.log(err);
+                return;
+            }
         response.status(301).redirect(req.baseUrl+'/resultatTemps?gpnum='+data["id"]);
     });
 };
 
 module.exports.supprimerTemps = function (req, response) {
     let data = req.params.num;
-
     let pilnum = data.split('_')[0];
     let gpnum = data.split('_')[1];
 
-      model.supprimerTemps(pilnum,gpnum,function (err, result) {
+    async.parallel ([
+            function (callback) {
+               model.supprimerTemps(pilnum,gpnum,function (err, res) {callback(null,res)});
+            },
+            function (callback) {
+                model.modifierMAJ(gpnum,function (err, res) {callback(null,res)});
+            },
+        ],
+
+        function (err, res) {
         response.status(301).redirect(req.baseUrl+'/resultatTemps?gpnum='+gpnum);
     });
+
 };

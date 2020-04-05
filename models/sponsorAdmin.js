@@ -121,3 +121,13 @@ module.exports.supprimerSponsor = function (num, callback) {
         }
     });
 };
+
+module.exports.supprimerSponsorise = function (num, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+            let sql = "delete from sponsorise where SPONUM =" +num;
+            connexion.query(sql,callback);
+            connexion.release();
+        }
+    });
+};

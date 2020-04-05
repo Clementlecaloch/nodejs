@@ -176,6 +176,9 @@ module.exports.supprimerSponsor= function (req, response) {
             function (callback) {
                   model.supprimerFinance(data, function (err, res) {callback(null,res)});
             },
+            function (callback) {
+                  model.supprimerSponsorise(data, function (err, res) {callback(null,res)});
+            },
         ],
 
         function (err, res) {

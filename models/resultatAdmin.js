@@ -78,6 +78,26 @@ module.exports.ajouterTemps = function (data, callback) {
     });
 };
 
+module.exports.modifierMAJ = function (data, callback) {
+    // connection à la base
+		var today = new Date();
+		var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+		var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+		var dateTime = date+' '+time;
+    db.getConnection(function(err, connexion){
+        if(!err){
+            // s'il n'y a pas d'erreur de connexion
+            // execution de la requête SQL
+            let sql = " update grandprix set GPDATEMAJ ='" + dateTime + "' where GPNUM = "+ data;
+            console.log (sql);
+            connexion.query(sql, callback);
+
+            // la connexion retourne dans le pool
+            connexion.release();
+        }
+    });
+};
+
 
 
 module.exports.supprimerTemps = function (pilnum,gpnum, callback) {
