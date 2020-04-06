@@ -1,13 +1,13 @@
 {{> listeRepPiloPartial}}
 
-    <img src="/image/pilote/{{{infoPilote.phoadresse}}}" alt="/image/photos.png" class="imageVignette">
-    <p><b>Nom : </b>{{infoPilote.pilnom}} {{infoPilote.pilprenom}}</p>
-    <p><b>Date de naissance : </b>{{formatDate infoPilote.pildatenais 'dddd D MMMM YYYY'}}</p>
-    <p><b>Pays : </b>{{infoPilote.paynom}}</p>
-    <p><b>Poids : </b>{{infoPilote.pilpoids}} Kg</p>
-    <p><b>Taille : </b>{{infoPilote.piltaille}} Cm</p>
-    {{#if infoPilote.ecunom}}
-        <p><b>Écurie : </b>{{infoPilote.ecunom}}</p>
+    <img src="/image/pilote/{{{infoPilote.PHOADRESSE}}}" onerror="this.src='/image/photos.png';" class="imageVignette">
+    <p><b>Nom : </b>{{infoPilote.PILNOM}} {{infoPilote.PILPRENOM}}</p>
+    <p><b>Date de naissance : </b>{{formatDate infoPilote.PILDATENAIS 'dddd D MMMM YYYY'}}</p>
+    <p><b>Pays : </b>{{infoPilote.PAYNOM}}</p>
+    <p><b>Poids : </b>{{infoPilote.PILPOIDS}} Kg</p>
+    <p><b>Taille : </b>{{infoPilote.PILTAILLE}} Cm</p>
+    {{#if infoPilote.ECUNOM}}
+        <p><b>Écurie : </b>{{infoPilote.ECUNOM}}</p>
     {{else}}
         <p><b>Écurie : </b> Pas d'écurie cette année</p>
     {{/if}}
@@ -15,13 +15,13 @@
     {{#if sponsorPilote}}
         <p><b>Principaux sponsors : </b></p>
         {{#each sponsorPilote}}
-            <p><b>{{this.sponom}}</b> ({{this.sposectactivite}})</p>
+            <p><b>{{this.SPONOM}}</b> ({{this.SPOSECTACTIVITE}})</p>
         {{/each}}
     {{/if}}
-    <p class="justify"><b>Qui suis je ? : </b>{{infoPilote.piltexte}}</p>
+    <p class="justify"><b>Qui suis je ? : </b>{{infoPilote.PILTEXTE}}</p>
 
     {{#each photoPilote}}
-      <a class="example-image-link" href="/image/pilote/{{{this.phoadresse}}}" data-lightbox="imagePilote" data-title="{{{this.phocommentaire}}}">
-        <img class="imgPilote" src="/image/pilote/{{{this.phoadresse}}}" alt="">
+      <a class="example-image-link" href="/image/pilote/{{{this.PHOADRESSE}}}" data-lightbox="imagePilote" data-title="{{{this.PHOCOMMENTAIRE}}}">
+        <img class="imgPilote" src="/image/pilote/{{{this.PHOADRESSE}}}" alt="">
       </a>
     {{/each}}

@@ -2,7 +2,7 @@
     {{> listeResultatPartial}}
 
     <div>
-        <h1> {{infoGP.gpnom}} {{formatDate infoGP.gpdate 'DD/MM/YYYY' }}</h1>
+        <h1> {{infoGP.GPNOM}} {{formatDate infoGP.GPDATE 'DD/MM/YYYY' }}</h1>
 
         <table class="grandPrixRes">
             <tr>
@@ -14,13 +14,13 @@
             {{#each score}}
                 <tr>
                     <td>{{this.row_number}}</td>
-                    <td>{{this.pilnom}} {{this.pilprenom}}</td>
-                    <td>{{this.tempscourse}}</td>
-                    <td>{{#if this.ptnbpointsplace}} {{this.ptnbpointsplace}} {{else}} 0 {{/if}}</td>
+                    <td>{{this.PILNOM}} {{this.PILPRENOM}}</td>
+                    <td>{{this.TEMPSCOURSE}}</td>
+                    <td>{{#if this.PTNBPOINTSPLACE}} {{this.PTNBPOINTSPLACE}} {{else}} 0 {{/if}}</td>
                 </tr>
             {{/each}}
         </table>
     </div>
 
 </div>
-    <p class="justify">{{infoGP.gpcommentaire}}</p>
+<p class="justify">{{infoGP.GPCOMMENTAIRE}}</p>

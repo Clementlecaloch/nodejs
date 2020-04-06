@@ -3,12 +3,12 @@
 
     <div>
         <div class="rowEcurie">
-            <img src="/image/ecurie/{{{infoEcu.ecuadresseimage}}}" alt="/image/photos.png" class="imageVignette">
+            <img src="/image/ecurie/{{{infoEcu.ECUADRESSEIMAGE}}}" onerror="this.src='/image/photos.png';" class="imageVignette">
             <div>
-                <p><b>Nom : </b>{{infoEcu.ecunom}}</p>
-                <p><b>Directeur : </b>{{infoEcu.ecunomdir}}</p>
-                <p><b>Adresse : </b>{{infoEcu.ecuadrsiege}}</p>
-                <p><b>Pays : </b>{{infoEcu.paynom}}</p>
+                <p><b>Nom : </b>{{infoEcu.ECUNOM}}</p>
+                <p><b>Directeur : </b>{{infoEcu.ECUNOMDIR}}</p>
+                <p><b>Adresse : </b>{{infoEcu.ECUADRSIEGE}}</p>
+                <p><b>Pays : </b>{{infoEcu.PAYNOM}}</p>
             </div>
         </div>
 
@@ -17,12 +17,12 @@
             <p><b>Pilotes : </b></p>
             {{#each pilotes}}
                 <div class="infobulle">
-                    <a href="/detailPilote/{{{this.pilnum}}}">{{this.pilprenom}} {{this.pilnom}} </a>
+                    <a href="/detailPilote/{{{this.PILNUM}}}">{{this.PILPRENOM}} {{this.PILNOM}} </a>
                     <span>
-                        <img  src="/image/pilote/{{{this.phoadresse}}}" alt="/image/photos.png">
+                        <img  src="/image/pilote/{{{this.PHOADRESSE}}}" onerror="this.src='/image/photos.png';">
                         <div>
-                            <p><b>{{this.pilprenom}} {{this.pilnom}} </b></p>
-                            <p>{{this.piltexte}}... </p>
+                            <p><b>{{this.PILPRENOM}} {{this.PILNOM}} </b></p>
+                            <p>{{this.PILTEXTE}}... </p>
                         </div>
                     </span>
                 </div>
@@ -30,9 +30,9 @@
             <div class="touteVoitures">
                 {{#each photo}}
                     <div class="infoVoiture">
-                        <img src="/image/ecurie/voiture/{{this.voiadresseimage}}" alt="/image/photos.png">
-                        <p>{{this.voinom}}</p>
-                        <p>{{this.typelibelle}}</p>
+                        <img src="/image/ecurie/voiture/{{this.VOIADRESSEIMAGE}}" onerror="this.src='/image/photos.png';">
+                        <p>{{this.VOINOM}}</p>
+                        <p>{{this.TYPELIBELLE}}</p>
                     </div>
                 {{/each}}
             </div>

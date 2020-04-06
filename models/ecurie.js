@@ -17,9 +17,9 @@ module.exports.getListeEcurie = function (callback) {
         if(!err){
         	  // s'il n'y a pas d'erreur de connexion
         	  // execution de la requête SQL
-						let sql ="SELECT ecunum, payadrdrap, ecunom FROM " +
+						let sql ="SELECT ECUNUM, PAYADRDRAP, ECUNOM FROM " +
                             "ecurie e INNER JOIN pays p ";
-						sql= sql + "ON p.paynum=e.paynum ORDER BY ecunom";
+						sql= sql + "ON p.PAYNUM=e.PAYNUM ORDER BY ECUNOM";
 						//console.log (sql);
             connexion.query(sql, callback);
 
@@ -33,7 +33,7 @@ module.exports.getEcurieByNumber = function (num, callback) {
 
     db.getConnection(function(err, connexion){
         if(!err){
-            let sql = "SELECT ecuadresseimage, ecunom, ecunomdir, ecuadrsiege, paynom FROM ecurie e join pays p on p.paynum = e.paynum where e.ecunum = " + num;
+            let sql = "SELECT ECUADRESSEIMAGE, ECUNOM, ECUNOMDIR, ECUADRSIEGE, PAYNOM FROM ecurie e join pays p on p.PAYNUM = e.PAYNUM where e.ECUNUM = " + num;
             connexion.query(sql, callback);
             connexion.release();
         }
@@ -44,7 +44,7 @@ module.exports.getPiloteByEcu = function (num, callback) {
 
     db.getConnection(function(err, connexion){
         if(!err){
-            let sql = "SELECT pi.pilnum, pilnom, pilprenom, phoadresse, substring(piltexte, 1, 200) as piltexte from pilote pi join photo ph on pi.pilnum = ph.pilnum join ecurie e on pi.ecunum = e.ecunum where phonum = 1 and e.ecunum = " + num;
+            let sql = "SELECT pi.PILNUM, PILNOM, PILPRENOM, PHOADRESSE, substring(PILTEXTE, 1, 200) as PILTEXTE from pilote pi join photo ph on pi.PILNUM = ph.PILNUM join ecurie e on pi.ECUNUM = e.ECUNUM where PHONUM = 1 and e.ECUNUM = " + num;
             connexion.query(sql, callback);
             connexion.release();
         }
@@ -55,7 +55,7 @@ module.exports.getPhotoEcu = function (num, callback) {
 
     db.getConnection(function(err, connexion){
         if(!err){
-            let sql = "SELECT voiadresseimage, voinom, typelibelle from voiture v join ecurie e on v.ecunum = e.ecunum join type_voiture t on t.typnum = v.typnum where e.ecunum = " + num;
+            let sql = "SELECT VOIADRESSEIMAGE, VOINUM, TYPELIBELLE from voiture v join ecurie e on v.ECUNUM = e.ECUNUM join type_voiture t on t.TYPNUM = v.TYPNUM where e.ECUNUM = " + num;
             connexion.query(sql, callback);
             connexion.release();
         }

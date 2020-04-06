@@ -3,15 +3,15 @@
     {{> listeCircuitPartial}}
 
     <div>
-        <img class="imgcircuit" src="/image/circuit/{{{detailCircuit.ciradresseimage}}}" alt="/image/photos.png">
+        <img class="imgcircuit" src="/image/circuit/{{{detailCircuit.CIRADRESSEIMAGE}}}" onerror="this.src='/image/photos.png';">
 
-        <p><b>Nom : </b>{{detailCircuit.cirnom}}</p>
+        <p><b>Nom : </b>{{detailCircuit.CIRNOM}}</p>
 
-        <p><b>Longueur : </b>{{detailCircuit.cirlongueur}} m</p>
+        <p><b>Longueur : </b>{{detailCircuit.CIRLONGUEUR}} m</p>
 
-        <p><b>Nombre de spectateurs : </b>{{detailCircuit.cirnbspectateurs}}</p>
+        <p><b>Nombre de spectateurs : </b>{{detailCircuit.CIRNBSPECTATEURS}}</p>
 
-        <p><b>Pays : </b>{{detailCircuit.paynom}}</p>
+        <p><b>Pays : </b>{{detailCircuit.PAYNOM}}</p>
     </div>
 </div>
-<p class="justify">{{detailCircuit.cirtext}}</p>
+<p class="justify">{{detailCircuit.CIRTEXT}}</p>

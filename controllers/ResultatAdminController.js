@@ -74,6 +74,7 @@ module.exports.ajouterTemps = function (req, response) {
 
 module.exports.supprimerTemps = function (req, response) {
     let data = req.params.num;
+
     let pilnum = data.split('_')[0];
     let gpnum = data.split('_')[1];
 
