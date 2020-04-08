@@ -1,6 +1,6 @@
 <div class="center">
 
-    <h1> Résultats de {{gpnom.gpnom}}</h1>
+    <h1> Résultats de {{gpnom.GPNOM}}</h1>
     <table>
         <tr>
             <th></th>
@@ -11,11 +11,11 @@
         </tr>
         {{#each resultat}}
             <tr>
-                <td><a href="/supprimerTemps/{{{this.pilnum}}}_{{this.gpnum}}"><img src="/image/act_delete.png" alt=""></td>
+                <td><a href="/supprimerTemps/{{{this.PILNUM}}}_{{this.GPNUM}}"><img src="/image/act_delete.png" alt=""></td>
                 <td>{{this.row_number}}</td>
-                <td>{{this.pilnom}} {{this.pilprenom}}</td>
-                <td>{{this.tempscourse}}</td>
-                <td>{{#if this.ptnbpointsplace}} {{this.ptnbpointsplace}} {{else}} 0 {{/if}}</td>
+                <td>{{this.PILNOM}} {{this.PILPRENOM}}</td>
+                <td>{{this.TEMPSCOURSE}}</td>
+                <td>{{#if this.PTNBPOINTSPLACE}} {{this.PTNBPOINTSPLACE}} {{else}} 0 {{/if}}</td>
             </tr>
         {{/each}}
         <form action="#" method="post">
@@ -24,7 +24,7 @@
             <td></td>
             <td>  <select name="PILNUM" required>
                   {{#each pilote}}
-                      <option value="{{{this.pilnum}}}">{{this.pilnom}} {{this.pilprenom}}</option>
+                      <option value="{{{this.PILNUM}}}">{{this.PILNOM}} {{this.PILPRENOM}}</option>
                   {{/each}}
                   </select> </td>
             <td><input type="number" name="heures" min="0" max="999" required> : <input type="number" name="minutes" min="0" max="59" required> : <input type="number" name="secondes"min="0" max="59"required>  </td>

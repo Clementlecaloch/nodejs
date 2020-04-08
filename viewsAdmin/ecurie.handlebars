@@ -13,10 +13,10 @@
         </tr>
         {{#each listeEcurie}}
             <tr>
-                <td>{{this.ecunom}}</td>
-                <td>{{this.ecunomdir}}</td>
-                <td> {{#if this.ecupoints}} {{this.ecupoints}} {{else}} 0 {{/if}}</td>
-                <td><img src="/image/act_edit.png" alt=""><a href="/modifierEcurie/{{{this.ecunum}}}">Modifier</a> <img src="/image/act_delete.png" alt=""><a href="/supprimerEcurie/{{{this.ecunum}}}">Supprimer</a></td>
+                <td>{{this.ECUNOM}}</td>
+                <td>{{this.ECUNOMDIR}}</td>
+                <td> {{#if this.ECUPOINTS}} {{this.ECUPOINTS}} {{else}} 0 {{/if}}</td>
+                <td><img src="/image/act_edit.png" alt=""><a href="/modifierEcurie/{{{this.ECUNUM}}}">Modifier</a> <img src="/image/act_delete.png" alt=""><a href="/supprimerEcurie/{{{this.ECUNUM}}}">Supprimer</a></td>
             </tr>
         {{/each}}
     </table>

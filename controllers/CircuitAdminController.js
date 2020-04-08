@@ -36,7 +36,7 @@ module.exports.ajouterCircuit = function (req, response) {
     data["CIRTEXT"] = data["CIRTEXT"].split("'").join("\\\'");
 
     if (!req.files || Object.keys(req.files).length === 0) {
-      name = 'null.png';
+      name = 'null';
     }else {
       file = req.files.foo;
       if (file.name.length > 20) {

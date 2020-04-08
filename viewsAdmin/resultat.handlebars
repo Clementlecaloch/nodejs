@@ -4,7 +4,7 @@
     <form action="/resultatTemps" method="get" class="formulaire1">
       <select name="gpnum">
           {{#each listeGrandPrix}}
-              <option value="{{{this.gpnum}}}">{{this.gpnom}}</option>
+              <option value="{{{this.GPNUM}}}">{{this.GPNOM}}</option>
           {{/each}}
       </select>
       <input class="valider" type="submit" value="Valider">

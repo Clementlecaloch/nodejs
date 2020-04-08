@@ -51,7 +51,7 @@ module.exports.ajouterPilote = function (req, response) {
     }
 
     if (!req.files || Object.keys(req.files).length === 0) {
-      file = 'null.png';
+      file = 'null';
     }else {
       file = req.files.foo;
       file.mv("./public/image/pilote/"+file.name, function (err,res){

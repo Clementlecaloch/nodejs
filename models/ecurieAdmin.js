@@ -6,7 +6,7 @@ module.exports.getListeEcurie = function (callback) {
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql = " SELECT ecunum, ecunom, ecunomdir, ecupoints FROM ecurie order by ecunom asc";
+            let sql = " SELECT ECUNUM, ECUNOM, ECUNOMDIR, ECUPOINTS FROM ecurie order by ECUNOM asc";
             //console.log (sql);
             connexion.query(sql, callback);
 
@@ -22,7 +22,7 @@ module.exports.getPaysEcurie = function (callback) {
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql = "SELECT paynum, paynom FROM pays order by paynom asc";
+            let sql = "SELECT PAYNUM, PAYNOM FROM pays order by PAYNOM asc";
             //console.log (sql);
             connexion.query(sql, callback);
 
@@ -45,7 +45,7 @@ module.exports.ajouterEcurie = function (data,file, callback) {
 module.exports.getInfoEcurie = function (num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-            let sql = "select ECUNOM,PAYNUM, ECUNUM, ECUNOMDIR, ECUADRSIEGE,ECUPOINTS from ecurie WHERE ecunum =" + num;
+            let sql = "select ECUNOM,PAYNUM, ECUNUM, ECUNOMDIR, ECUADRSIEGE,ECUPOINTS from ecurie WHERE ECUNUM =" + num;
             connexion.query(sql,callback);
             connexion.release();
         }
@@ -55,8 +55,8 @@ module.exports.getInfoEcurie = function (num, callback) {
 module.exports.modifierEcurie = function (data,num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-          let sql = "update ecurie SET ecunom = '" + data["ECUNOM"] +"',  paynum = " + data["PAYNUM"] +", ecupoints = " + data["ECUPOINTS"] +", " +
-            " ECUADRSIEGE = '" + data["ECUADRSIEGE"] +"', ecunomdir = '" + data["ECUNOMDIR"] + "' where ecunum = " + num;
+          let sql = "update ecurie SET ECUNOM = '" + data["ECUNOM"] +"',  PAYNUM = " + data["PAYNUM"] +", ECUPOINTS = " + data["ECUPOINTS"] +", " +
+            " ECUADRSIEGE = '" + data["ECUADRSIEGE"] +"', ECUNOMDIR = '" + data["ECUNOMDIR"] + "' where ECUNUM = " + num;
           connexion.query(sql,data,callback);
           connexion.release();
         }
@@ -66,7 +66,7 @@ module.exports.modifierEcurie = function (data,num, callback) {
 module.exports.modifierPhoto = function (photo,id, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-          let sql = "update ecurie SET ECUADRESSEIMAGE = '"+photo+"' where ecunum = " + id ;
+          let sql = "update ecurie SET ECUADRESSEIMAGE = '"+photo+"' where ECUNUM = " + id ;
           connexion.query(sql,callback);
           connexion.release();
         }

@@ -13,10 +13,10 @@
         </tr>
         {{#each listeCircuit}}
             <tr>
-                <td>{{this.cirnom}}</td>
-                <td>{{this.cirlongueur}} m</td>
-                <td>{{this.cirnbspectateurs}}</td>
-                <td><img src="/image/act_edit.png" alt=""><a href="/modifierCircuit/{{{this.cirnum}}}">Modifier</a> <img src="/image/act_delete.png" alt=""><a href="/supprimerCircuit/{{{this.cirnum}}}">Supprimer</a></td>
+                <td>{{this.CIRNOM}}</td>
+                <td>{{this.CIRLONGUEUR}} m</td>
+                <td>{{this.CIRNBSPECTATEURS}}</td>
+                <td><img src="/image/act_edit.png" alt=""><a href="/modifierCircuit/{{{this.CIRNUM}}}">Modifier</a> <img src="/image/act_delete.png" alt=""><a href="/supprimerCircuit/{{{this.CIRNUM}}}">Supprimer</a></td>
             </tr>
         {{/each}}
     </table>

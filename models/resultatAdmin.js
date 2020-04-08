@@ -6,7 +6,7 @@ module.exports.getListeGrandPrix = function (callback) {
         if(!err){
         	  // s'il n'y a pas d'erreur de connexion
         	  // execution de la requête SQL
-						let sql ="SELECT gpnum, gpnom FROM grandprix ORDER BY gpnom";
+						let sql ="SELECT GPNUM, GPNOM FROM grandprix ORDER BY GPNOM";
 						//console.log (sql);
             connexion.query(sql, callback);
 
@@ -19,10 +19,10 @@ module.exports.getListeGrandPrix = function (callback) {
 module.exports.getInfoResultatPrix = function (data, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-            let sql = "select row_number,pilnum, pilnom, pilprenom, tempscourse, ptnbpointsplace,gpnum	 from ";
-						sql = sql + "(SELECT @row_number:=@row_number+1 AS row_number ,p.pilnum,pilnom, pilprenom, tempscourse,gpnum from course c join pilote p on c.pilnum = p.pilnum ";
-						sql = sql + "JOIN (SELECT @row_number := 0 FROM DUAL) as sub "
-						sql = sql + "where c.gpnum =" + data +" order by tempscourse asc) t LEFT join points p on p.PTPLACE=t.row_number ";
+						let sql = "select row_number, PILNOM,PILNUM, PILPRENOM, TEMPSCOURSE, PTNBPOINTSPLACE,GPNUM from ";
+						sql = sql + "(SELECT @row_number:=@row_number+1 AS row_number ,PILNOM, p.PILNUM, PILPRENOM, TEMPSCOURSE,GPNUM from course c join pilote p on c.PILNUM = p.PILNUM ";
+						sql = sql + "JOIN (SELECT @row_number := 0 FROM DUAL) as sub ";
+						sql = sql + "where c.GPNUM =" + data +" order by TEMPSCOURSE asc) t left join points p on p.PTPLACE=t.row_number ";
 						connexion.query(sql,callback);
             connexion.release();
         }
@@ -35,7 +35,7 @@ module.exports.getListePilote = function (callback) {
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql = " SELECT pilnum, pilnom, pilprenom FROM pilote";
+            let sql = " SELECT PILNUM, PILNOM, PILPRENOM FROM pilote order by PILNOM asc";
             //console.log (sql);
             connexion.query(sql, callback);
 
@@ -52,7 +52,7 @@ module.exports.getNomGP = function (data, callback) {
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql = " SELECT gpnom from grandprix where gpnum = "+data;
+            let sql = " SELECT GPNOM from grandprix where GPNUM = "+data;
             //console.log (sql);
             connexion.query(sql, callback);
 
@@ -106,7 +106,7 @@ module.exports.supprimerTemps = function (pilnum,gpnum, callback) {
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql = "DELETE FROM course where PILNUM = "+pilnum+" and gpnum = "+gpnum+" ";
+            let sql = "DELETE FROM course where PILNUM = "+pilnum+" and GPNUM = "+gpnum+" ";
             console.log (sql);
             connexion.query(sql, callback);
 

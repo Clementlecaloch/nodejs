@@ -6,7 +6,7 @@ module.exports.getListeCircuit = function (callback) {
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql = " SELECT cirnum, cirnom, cirlongueur, cirnbspectateurs FROM circuit order by cirnom asc";
+            let sql = " SELECT CIRNUM, CIRNOM, CIRLONGUEUR, CIRNBSPECTATEURS FROM circuit order by CIRNOM asc";
             //console.log (sql);
             connexion.query(sql, callback);
 
@@ -22,7 +22,7 @@ module.exports.getPaysCircuit = function (callback) {
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql = "SELECT paynum, paynom FROM pays order by paynom asc";
+            let sql = "SELECT PAYNUM, PAYNOM FROM pays order by PAYNOM asc";
             //console.log (sql);
             connexion.query(sql, callback);
 
@@ -45,7 +45,7 @@ module.exports.ajouterCircuit = function (data,file, callback) {
 module.exports.getInfoCircuit = function (num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-            let sql = "select CIRNOM,PAYNUM, CIRNUM, CIRLONGUEUR, CIRNBSPECTATEURS,CIRADRESSEIMAGE,CIRTEXT from circuit WHERE cirnum =" + num;
+            let sql = "select CIRNOM,PAYNUM, CIRNUM, CIRLONGUEUR, CIRNBSPECTATEURS,CIRADRESSEIMAGE,CIRTEXT from circuit WHERE CIRNUM =" + num;
             connexion.query(sql,callback);
             connexion.release();
         }
@@ -55,8 +55,9 @@ module.exports.getInfoCircuit = function (num, callback) {
 module.exports.modifierCircuit = function (data,num, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-          let sql = "update circuit SET cirnom = '" + data["CIRNOM"] +"',  paynum = " + data["PAYNUM"] +", cirlongueur = " + data["CIRLONGUEUR"] +", " +
-            " cirtext = '" + data["CIRTEXT"] +"', cirnbspectateurs = " + data["CIRNBSPECTATEURS"] + " where cirnum = " +num;
+          let sql = "update circuit SET CIRNOM = '" + data["CIRNOM"] +"',  PAYNUM = " + data["PAYNUM"] +", CIRLONGUEUR = " + data["CIRLONGUEUR"] +", " +
+            " CIRTEXT = '" + data["CIRTEXT"] +"', CIRNBSPECTATEURS = " + data["CIRNBSPECTATEURS"] + " where CIRNUM = " +num;
+            console.log(sql);
           connexion.query(sql,data,callback);
           connexion.release();
         }
@@ -66,7 +67,7 @@ module.exports.modifierCircuit = function (data,num, callback) {
 module.exports.modifierPhoto = function (photo,id, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-          let sql = "update circuit SET CIRADRESSEIMAGE = '"+photo+"' where cirnum = " + id ;
+          let sql = "update circuit SET CIRADRESSEIMAGE = '"+photo+"' where CIRNUM = " + id ;
 
           console.log(sql);
           connexion.query(sql,callback);

@@ -6,7 +6,7 @@ module.exports.getListeSponsor = function (callback) {
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql = " SELECT sponum,sponom, sposectactivite FROM sponsor order by sponom asc";
+            let sql = " SELECT SPONUM,SPONOM, SPOSECTACTIVITE FROM sponsor order by SPONOM asc";
             //console.log (sql);
             connexion.query(sql, callback);
 
@@ -22,7 +22,7 @@ module.exports.getListeEcurie = function (callback) {
         if(!err){
             // s'il n'y a pas d'erreur de connexion
             // execution de la requête SQL
-            let sql = " SELECT ecunum, ecunom FROM ecurie order by ecunom asc";
+            let sql = " SELECT ECUNUM, ECUNOM FROM ecurie order by ECUNOM asc";
             //console.log (sql);
             connexion.query(sql, callback);
 

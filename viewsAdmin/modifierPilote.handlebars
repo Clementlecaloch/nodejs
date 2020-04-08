@@ -1,39 +1,39 @@
 <h1>Modifier un pilote</h1>
 <form action="#" method="post" enctype="multipart/form-data">
     <label>Prénom</label>
-    <input name="PILPRENOM" type="text" value="{{{pilote.pilprenom}}}">
+    <input name="PILPRENOM" type="text" value="{{{pilote.PILPRENOM}}}">
     <label>Nom</label>
-    <input name="PILNOM" type="text" value="{{{pilote.pilnom}}}">
+    <input name="PILNOM" type="text" value="{{{pilote.PILNOM}}}">
     <label>Date de naissance</label>
-    <input name="PILDATENAIS" type="date" value={{formatDate pilote.pildatenais 'YYYY-MM-DD'}}>
+    <input name="PILDATENAIS" type="date" value={{formatDate pilote.PILDATENAIS 'YYYY-MM-DD'}}>
     <label>Nationalité</label>
     <select name="PAYNUM" id="nationalite">
         {{#each nationalite}}
-            <option value="{{{this.paynum}}}" >{{this.paynat}}</option>
+            <option value="{{{this.PAYNUM}}}" >{{this.PAYNAT}}</option>
         {{/each}}
     </select>
     <label>Ecurie</label>
     <select name="ECUNUM" id="ecurie">
       <option value="NULL">Pas d'écurie</option>
       {{#each ecurie}}
-          <option value="{{{this.ecunum}}}">{{this.ecunom}}</option>
+          <option value="{{{this.ECUNUM}}}">{{this.ECUNOM}}</option>
       {{/each}}
     </select>
     <label>Points</label>
-    <input name="PILPOINTS" type="number" {{#if pilote.pilpoints}} value="{{{pilote.pilpoints}}}"{{else}} value="0" {{/if}}>
+    <input name="PILPOINTS" type="number" {{#if pilote.PILPOINTS}} value="{{{pilote.PILPOINTS}}}"{{else}} value="0" {{/if}}>
     <label>Poids</label>
-    <input name="PILPOIDS" type="number" value="{{{pilote.pilpoids}}}">
+    <input name="PILPOIDS" type="number" value="{{{pilote.PILPOIDS}}}">
     <label>Taille</label>
-    <input name="PILTAILLE" type="number" value="{{{pilote.piltaille}}}">
+    <input name="PILTAILLE" type="number" value="{{{pilote.PILTAILLE}}}">
     <label >Image officielle</label>
     <input type="file" name="foo">
     <label>Description</label>
-    <textarea name="PILTEXTE" id="PILTEXTE" cols="30" rows="10">{{{pilote.piltexte}}}</textarea>
+    <textarea name="PILTEXTE" id="PILTEXTE" cols="30" rows="10">{{{pilote.PILTEXTE}}}</textarea>
     <input class="valider" type="submit" value="Modifier">
 </form>
 
 
 <script type="text/javascript">
-  document.getElementById('ecurie').value={{{pilote.ecunum}}};
-  document.getElementById('nationalite').value={{{pilote.paynum}}};
+  document.getElementById('ecurie').value={{{pilote.ECUNUM}}};
+  document.getElementById('nationalite').value={{{pilote.PAYNUM}}};
 </script>

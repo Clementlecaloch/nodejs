@@ -37,7 +37,7 @@ module.exports.ajouterEcurie = function (req, response) {
     data["ECUADRSIEGE"] = data["ECUADRSIEGE"].split("'").join("\\\'");
 
     if (!req.files || Object.keys(req.files).length === 0) {
-      file.name = 'null.png';
+      file.name = 'null';
     }else {
       file = req.files.foo;
       if (file.name.length > 20) {
