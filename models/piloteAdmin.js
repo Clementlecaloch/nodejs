@@ -86,7 +86,7 @@ module.exports.modifierPilote = function (data,num, callback) {
             " PILTEXTE = '" + data["PILTEXTE"] +"', PILPOIDS = " + data["PILPOIDS"] +", PILTAILLE = " + data["PILTAILLE"] +", PILPOINTS = " + data["PILPOINTS"] +", ECUNUM = " + data["ECUNUM"] +" "+
             ", PAYNUM = "+ data["PAYNUM"]+" where PILNUM = " + num
           console.log(sql);
-          connexion.query(sql,data,callback);
+          connexion.query(sql,callback);
           connexion.release();
         }
     });
@@ -116,6 +116,36 @@ module.exports.supprimerPhoto = function (id, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
           let sql = "DELETE FROM photo where PILNUM = " + id;
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerPiloteFromCourse = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM course where PILNUM = " + id;
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerPiloteFromEssais = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM essais where PILNUM = " + id;
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerPiloteFromSponsorise = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM sponsorise where PILNUM = " + id;
           connexion.query(sql,callback);
           connexion.release();
         }

@@ -57,7 +57,7 @@ module.exports.modifierEcurie = function (data,num, callback) {
         if(!err) {
           let sql = "update ecurie SET ECUNOM = '" + data["ECUNOM"] +"',  PAYNUM = " + data["PAYNUM"] +", ECUPOINTS = " + data["ECUPOINTS"] +", " +
             " ECUADRSIEGE = '" + data["ECUADRSIEGE"] +"', ECUNOMDIR = '" + data["ECUNOMDIR"] + "' where ECUNUM = " + num;
-          connexion.query(sql,data,callback);
+          connexion.query(sql,callback);
           connexion.release();
         }
     });
@@ -76,8 +76,38 @@ module.exports.modifierPhoto = function (photo,id, callback) {
 module.exports.supprimerEcurie = function (id, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-          let sql = "DELETE FROM ECURIE where ECUNUM = " + id;
-          connexion.query(sql,data,callback);
+          let sql = "DELETE FROM ecurie where ECUNUM = " + id;
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerEcurieFromFinance = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM finance where ECUNUM = " + id;
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerEcurieFromVoiture = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM voiture where ECUNUM = " + id;
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};
+
+module.exports.modifierEcurieFromPilote = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "update pilote SET ECUNUM = null where ECUNUM = " + id;
+          connexion.query(sql,callback);
           connexion.release();
         }
     });

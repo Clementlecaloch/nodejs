@@ -196,12 +196,21 @@ module.exports.supprimmerPilote = function (req, response) {
 
     async.parallel ([
             function (callback) {
+                model.supprimerPhoto(num,function (err, res) {callback(null,res)});
+            },
+            function (callback) {
+                model.supprimerPiloteFromSponsorise(num,function (err, res) {callback(null,res)});
+            },
+            function (callback) {
+                model.supprimerPiloteFromCourse(num,function (err, res) {callback(null,res)});
+            },
+            function (callback) {
+                model.supprimerPiloteFromEssais(num,function (err, res) {callback(null,res)});
+            },
+            function (callback) {
               sleep(100).then(() => {
                 model.supprimerPilote(num, function (err, res) {callback(null,res)});
               });
-            },
-            function (callback) {
-                model.supprimerPhoto(num,function (err, res) {callback(null,res)});
             },
         ],
 

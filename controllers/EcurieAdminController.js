@@ -171,7 +171,29 @@ module.exports.Supprimer = function (request, response) {
 module.exports.supprimerEcurie = function (req, response) {
     let num = req.params.num;
 
-    model.supprimerEcurie(num, function (err, res) {
+    function sleep (time) {
+        return new Promise((resolve) => setTimeout(resolve, time));
+    }
+
+    async.parallel ([
+            function (callback) {
+                model.modifierEcurieFromPilote(num, function (err, result) {callback(null,result)});
+            },
+            function (callback) {
+                model.supprimerEcurieFromVoiture(num, function (err, result) {callback(null,result)});
+            },
+            function (callback) {
+                model.supprimerEcurieFromFinance(num, function (err, result) {callback(null,result)});
+            },
+            function (callback) {
+              sleep(100).then(() => {
+                model.supprimerEcurie(num,function (err, result) {callback(null,result)});
+              });
+            },
+
+        ],
+
+   function (err, res) {
       response.status(301).redirect(req.baseUrl+'/ecurieAdmin');
     });
 };

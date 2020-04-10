@@ -57,8 +57,7 @@ module.exports.modifierCircuit = function (data,num, callback) {
         if(!err) {
           let sql = "update circuit SET CIRNOM = '" + data["CIRNOM"] +"',  PAYNUM = " + data["PAYNUM"] +", CIRLONGUEUR = " + data["CIRLONGUEUR"] +", " +
             " CIRTEXT = '" + data["CIRTEXT"] +"', CIRNBSPECTATEURS = " + data["CIRNBSPECTATEURS"] + " where CIRNUM = " +num;
-            console.log(sql);
-          connexion.query(sql,data,callback);
+          connexion.query(sql,callback);
           connexion.release();
         }
     });
@@ -79,8 +78,28 @@ module.exports.modifierPhoto = function (photo,id, callback) {
 module.exports.supprimerCircuit = function (id, callback) {
     db.getConnection(function (err,connexion) {
         if(!err) {
-          let sql = "DELETE FROM CIRCUIT where CIRNUM = " + id;
-          connexion.query(sql,data,callback);
+          let sql = "DELETE FROM circuit where CIRNUM = " + id;
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerCircuitFromGP = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM grandprix where CIRNUM = " + id;
+          connexion.query(sql,callback);
+          connexion.release();
+        }
+    });
+};
+
+module.exports.supprimerGPFromCourse = function (id, callback) {
+    db.getConnection(function (err,connexion) {
+        if(!err) {
+          let sql = "DELETE FROM course where GPNUM = (select GPNUM )" + id;
+          connexion.query(sql,callback);
           connexion.release();
         }
     });
