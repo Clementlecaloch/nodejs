@@ -84,23 +84,3 @@ module.exports.supprimerCircuit = function (id, callback) {
         }
     });
 };
-
-module.exports.supprimerCircuitFromGP = function (id, callback) {
-    db.getConnection(function (err,connexion) {
-        if(!err) {
-          let sql = "DELETE FROM grandprix where CIRNUM = " + id;
-          connexion.query(sql,callback);
-          connexion.release();
-        }
-    });
-};
-
-module.exports.supprimerGPFromCourse = function (id, callback) {
-    db.getConnection(function (err,connexion) {
-        if(!err) {
-          let sql = "DELETE FROM course where GPNUM = (select GPNUM )" + id;
-          connexion.query(sql,callback);
-          connexion.release();
-        }
-    });
-};

@@ -4,22 +4,22 @@
     "private": true,
     "version": "0.1.4",
     "dependencies": {
-        "async": "^3.1.1",
+        "async": "^3.2.0",
         "body-parser": "^1.19.0",
-        "cookie-parser": "^1.4.4",
+        "cookie-parser": "^1.4.5",
         "cors": "^2.8.5",
-        "cryptr": "^6.0.1",
+        "cryptr": "^6.0.2",
         "express": "^4.17.1",
         "express-fileupload": "^1.1.6",
         "express-handlebars": "^3.1.0",
         "express-session": "~1.17",
         "moment": "^2.24.0",
-        "morgan": "^1.9.1",
+        "morgan": "^1.10.0",
         "multer": "^1.4.2",
         "mysql": "^2.18.1",
         "unidecode": "^0.1.8"
     },
     "devDependencies": {
-        "nodemon": "^2.0.2"
+        "nodemon": "^2.0.3"
     }
 }
