@@ -50,19 +50,9 @@ module.exports.ajouterPilote = function (req, response) {
         delete data["ECUNUM"];
     }
 
-    if (!req.files || Object.keys(req.files).length === 0) {
-      file = 'null';
-    }else {
-      file = req.files.foo;
-      file.mv("./public/image/pilote/"+file.name, function (err,res){
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('Upload');
-        }
-        file = file.name
-      });
-    }
+    file = req.files.foo;
+    name = ''.concat('pil',data["PILNOM"].substring(0,40),'.png');
+    file.mv("./public/image/pilote/"+name, function (err,res){});
 
     function sleep (time) {
         return new Promise((resolve) => setTimeout(resolve, time));
@@ -74,7 +64,7 @@ module.exports.ajouterPilote = function (req, response) {
             },
             function (callback) {
                 sleep(100).then(() => {
-                    model.ajouterPhoto(file,function (err, res) {callback(null,res)});
+                    model.ajouterPhoto(name,function (err, res) {callback(null,res)});
                 });
             },
         ],
@@ -139,11 +129,14 @@ module.exports.modifierPilote = function (req, response) {
                 model.modifierPilote(data,num, function (err, res) {callback(null,res)});
             },
             function (callback) {
-              if (!req.files || Object.keys(req.files).length === 0) {
-                callback(null,null);
-              }else {
-                let file = req.files.foo;
-                model.modifierPhoto(file.name,num,function (err, res) {callback(null,res)});
+              if (req.files) {
+                file = req.files.foo;
+                name = ''.concat('pil',num,'.png')
+                file.mv("./public/image/pilote/"+name, function (err,res){});
+                model.modifierPhoto(name,num,function (err, res) {callback(null,res)});
+              }
+              else {
+                callback();
               }
             },
         ],
@@ -155,18 +148,6 @@ module.exports.modifierPilote = function (req, response) {
                 return;
             }
 
-            if (!req.files || Object.keys(req.files).length === 0) {
-
-            }else {
-              file = req.files.foo;
-              file.mv("./public/image/pilote/"+file.name, function (err,res){
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log('Upload');
-                }
-              });
-            }
 
             response.status(301).redirect(req.baseUrl+'/piloteAdmin');
         }

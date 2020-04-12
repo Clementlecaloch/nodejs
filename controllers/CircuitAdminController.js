@@ -35,25 +35,10 @@ module.exports.ajouterCircuit = function (req, response) {
     data["CIRNOM"] = data["CIRNOM"].split("'").join("\\\'");
     data["CIRTEXT"] = data["CIRTEXT"].split("'").join("\\\'");
 
-    if (!req.files || Object.keys(req.files).length === 0) {
-      name = 'null';
-    }else {
-      file = req.files.foo;
-      if (file.name.length > 20) {
-        name = ''.concat('cir',data["CIRNOM"].substring(0,10),'.png')
-      }else {
-        name = file.name
-      }
+    file = req.files.foo;
+    name = ''.concat('cir',data["CIRNOM"].substring(0,10),'.png');
+    file.mv("./public/image/circuit/"+name, function (err,res){});
 
-      file.mv("./public/image/circuit/"+name, function (err,res){
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('Upload');
-        }
-      });
-
-    }
 
     model.ajouterCircuit(data,name, function (err, res) {
         if (err) {
@@ -107,16 +92,14 @@ module.exports.modifierCircuit = function (req, response) {
                 model.modifierCircuit(data,num, function (err, res) {callback(null,res)});
             },
             function (callback) {
-              if (!req.files || Object.keys(req.files).length === 0) {
-                callback(null,null);
-              }else {
-                let file = req.files.foo;
-                if (file.name.length > 20) {
-                  name = ''.concat('cir',num,'.png')
-                }else {
-                  name = file.name
-                }
+              if (req.files) {
+                file = req.files.foo;
+                name = ''.concat('cir',num,'.png')
+                file.mv("./public/image/circuit/"+name, function (err,res){});
                 model.modifierPhoto(name,num,function (err, res) {callback(null,res)});
+              }
+              else {
+                callback();
               }
             },
         ],
@@ -128,18 +111,6 @@ module.exports.modifierCircuit = function (req, response) {
                 return;
             }
 
-            if (!req.files || Object.keys(req.files).length === 0) {
-
-            }else {
-              file = req.files.foo;
-              file.mv("./public/image/circuit/"+name, function (err,res){
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log('Upload');
-                }
-              });
-            }
 
             response.status(301).redirect(req.baseUrl+'/circuitAdmin');
         }

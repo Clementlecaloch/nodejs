@@ -36,23 +36,9 @@ module.exports.ajouterEcurie = function (req, response) {
     data["ECUNOMDIR"] = data["ECUNOMDIR"].split("'").join("\\\'");
     data["ECUADRSIEGE"] = data["ECUADRSIEGE"].split("'").join("\\\'");
 
-    if (!req.files || Object.keys(req.files).length === 0) {
-      file.name = 'null';
-    }else {
-      file = req.files.foo;
-      if (file.name.length > 20) {
-        name = ''.concat('ecu',data["ECUNOM"].substring(0,10),'.png')
-      }else {
-        name = file.name
-      }
-      file.mv("./public/image/ecurie/"+name, function (err,res){
-        if (err) {
-          console.log(err);
-        } else {
-          console.log('Upload');
-        }
-      });
-    }
+    file = req.files.foo;
+    name = ''.concat('ecu',data["ECUNOM"].substring(0,10),'.png');
+    file.mv("./public/image/ecurie/"+name, function (err,res){});
 
     model.ajouterEcurie(data,name, function (err, res) {
       if (err) {
@@ -109,16 +95,14 @@ module.exports.modifierEcurie = function (req, response) {
                 model.modifierEcurie(data,num, function (err, res) {callback(null,res)});
             },
             function (callback) {
-              if (!req.files || Object.keys(req.files).length === 0) {
-                callback(null,null);
-              }else {
-                let file = req.files.foo;
-                if (file.name.length > 20) {
-                  name = ''.concat('cir',num.substring(0,10),'.png')
-                }else {
-                  name = file.name
-                }
+              if (req.files) {
+                file = req.files.foo;
+                name = ''.concat('cir',num,'.png');
+                file.mv("./public/image/ecurie/"+name, function (err,res){});
                 model.modifierPhoto(name,num,function (err, res) {callback(null,res)});
+              }
+              else {
+                callback();
               }
             },
         ],
@@ -128,24 +112,6 @@ module.exports.modifierEcurie = function (req, response) {
                 // gestion de l'erreur
                 console.log(err);
                 return;
-            }
-
-            if (!req.files || Object.keys(req.files).length === 0) {
-
-            }else {
-              file = req.files.foo;
-              if (file.name.length > 20) {
-                name = ''.concat('cir',num.substring(0,10),'.png')
-              }else {
-                name = file.name
-              }
-              file.mv("./public/image/ecurie/"+name, function (err,res){
-                if (err) {
-                  console.log(err);
-                } else {
-                  console.log('Upload');
-                }
-              });
             }
 
             response.status(301).redirect(req.baseUrl+'/ecurieAdmin');
