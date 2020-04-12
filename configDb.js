@@ -20,7 +20,6 @@ let pool  = mysql.createPool({
 module.exports.getConnection = function(callback) {
     pool.getConnection(function(err, connection) {
         callback(err, connection);
-
     });
 
 };
